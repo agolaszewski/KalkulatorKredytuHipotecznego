@@ -1,0 +1,29 @@
+﻿@page "/"
+
+<Tabs Justified="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
+    <Items>
+        <Tab Name="propertyAcquisitionDetails">Kosztu nabycia nieruchomości</Tab>
+        <Tab Name="basicDetails">Podstawowe dane o kredycie</Tab>
+        <Tab Name="additionalCosts">Koszty okołokredytowe</Tab>
+    </Items>
+    <Content>
+        <TabPanel Name="propertyAcquisitionDetails">
+            <PropertyAcquisitionDetails></PropertyAcquisitionDetails>
+        </TabPanel>
+        <TabPanel Name="basicDetails">
+            <BasicDetails></BasicDetails>
+        </TabPanel>
+        <TabPanel Name="additionalCosts">
+            <AdditionalCosts></AdditionalCosts>
+        </TabPanel>
+    </Content>
+</Tabs>
+
+@code{
+    string selectedTab = "basicDetails";
+
+    private void OnSelectedTabChanged( string name )
+    {
+        selectedTab = name;
+    }
+}

@@ -1,0 +1,194 @@
+﻿<Row>
+    <Column>
+        <FormField Text="Prowizja za udzielenie kredytu">
+            <Addons>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">%</SelectItem>
+                        <SelectItem Value="2">PLN</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Opłata za wycenę">
+            <NumericEdit Min="0" Max="10000" />
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Ubezpieczenie pomostowe">
+            <Addons>
+                <Addon AddonType="AddonType.Start">
+                    <AddonLabel>Podwyzka marży o</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>% Przez</AddonLabel> 
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>Miesiecy</AddonLabel>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Ubezpieczenie nierychomości">
+            <Addons>
+                <Addon AddonType="AddonType.Start">
+                    <AddonLabel>Opłata pobierana</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.Start">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Rocznie</SelectItem>
+                        <SelectItem Value="2">Miesiecznie</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">%</SelectItem>
+                        <SelectItem Value="2">PLN</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Wartośc kredytu</SelectItem>
+                        <SelectItem Value="2">Kwota kredytu</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>Przez</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Miesiecy</SelectItem>
+                        <SelectItem Value="2">Lat</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Ubezpieczenie na zycie">
+            <Addons>
+                <Addon AddonType="AddonType.Start">
+                    <AddonLabel>Opłata pobierana</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.Start">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Rocznie</SelectItem>
+                        <SelectItem Value="2">Miesiecznie</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>Przez</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Miesiecy</SelectItem>
+                        <SelectItem Value="2">Lat</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Ubezpieczenie nieskiego wkładu własnego">
+            <Addons>
+                <Addon AddonType="AddonType.Start">
+                    <AddonLabel>Bank</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.Start">
+                    <Select TValue="int">
+                        <SelectItem Value="1">podnosi marżę</SelectItem>
+                        <SelectItem Value="2">pobiera opłate z góry</SelectItem>
+                        <SelectItem Value="2">pobiera co</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.Start">
+                    <Select TValue="int">
+                        <SelectItem Value="1">miesiac</SelectItem>
+                        <SelectItem Value="2">rok</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">%</SelectItem>
+                        <SelectItem Value="2">PLN</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">stała kwotę</SelectItem>
+                        <SelectItem Value="2">brakującego wkłądu</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Ubezpieczenie od utraty pracy">
+            <Addons>
+                <Addon AddonType="AddonType.Start">
+                    <AddonLabel>Opłata pobierana</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.Start">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Rocznie</SelectItem>
+                        <SelectItem Value="2">Miesiecznie</SelectItem>
+                    </Select>
+                </Addon>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>Przez</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <NumericEdit Min="0" Max="50" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="int">
+                        <SelectItem Value="1">Miesiecy</SelectItem>
+                        <SelectItem Value="2">Lat</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+
+

@@ -1,0 +1,71 @@
+﻿@using KalkulatorKredytuHipotecznego.Store
+@using KalkulatorKredytuHipotecznego.Store.States
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<Row>
+    <Column>
+        <FormField Text="Kwota kredytu">
+            <NumericEdit Min="0" Max="100000000" TValue="decimal" @bind-Value="State.Value.CreditAmount" />
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Okres kredytowania">
+            <Addons>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="@MaxCreditPeriods()" TValue="int" @bind-Value="State.Value.CreditPeriods" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Select TValue="PeriodType" @bind-SelectedValue="State.Value.CreditPeriodType">
+                        <SelectItem Value="@PeriodType.Months">miesiecy</SelectItem>
+                        <SelectItem Value="@PeriodType.Years">lat</SelectItem>
+                    </Select>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Marża">
+            <Addons>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="100" TValue="decimal" Step="0.1M" @bind-Value="State.Value.Margin" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>%</AddonLabel>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Wibor z dnia uruchomienia">
+            <Addons>
+                <Addon AddonType="AddonType.Body">
+                    <NumericEdit Min="0" Max="100" TValue="decimal" Step="0.1M" @bind-Value="State.Value.WarsawInterbankOfferedRate" />
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel>%</AddonLabel>
+                </Addon>
+            </Addons>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <FormField Text="Otwarcie kredytu">
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.CreditOpening" />
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Dzien pobrania pierwszej raty">
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.FirstInstalmentDate" />
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Rodzaj rat">
+            <RadioGroup TValue="InstalmentType" Buttons="true" @bind-CheckedValue="State.Value.InstalmentType" Display="Display.Flex">
+                <Radio Value="@InstalmentType.Flat">Rowne</Radio>
+                <Radio Value="@InstalmentType.Decreasing">Malejace</Radio>
+            </RadioGroup>
+        </FormField>
+    </Column>
+</Row>
