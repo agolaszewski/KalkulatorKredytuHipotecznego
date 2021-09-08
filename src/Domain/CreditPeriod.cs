@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KalkulatorKredytuHipotecznego.Domain
 {
@@ -241,6 +242,18 @@ namespace KalkulatorKredytuHipotecznego.Domain
 
         private bool IsHoliday(DateTime date)
         {
+            return IsStaticHoliday(date) || IsMovableHoliday(date);
+        }
+
+        private bool IsStaticHoliday(DateTime date)
+        {
+            return _static.Any(holiday => holiday.Equals(date));
+        }
+
+        private bool IsMovableHoliday(DateTime date)
+        {
+            var holidays = Moveable(date.Year);
+            return holidays.Any(holiday => holiday.Equals(date));
         }
 
         public bool IsFreeDay(DateTime date)
