@@ -1,0 +1,32 @@
+﻿<Table>
+    <TableHeader>
+        <TableRow>
+            <TableHeaderCell>Data</TableHeaderCell>
+            <TableHeaderCell>Rata</TableHeaderCell>
+            <TableHeaderCell>Odsetki</TableHeaderCell>
+            <TableHeaderCell>Kapitał</TableHeaderCell>
+            <TableHeaderCell>Pozostało do spłaty</TableHeaderCell>
+            <TableHeaderCell>Koszty okołokredytowe</TableHeaderCell>
+        </TableRow>
+    </TableHeader>
+    <TableBody>
+        @foreach (var number in Numbers)
+        {
+            <TableRow>
+                <TableRowCell>@number</TableRowCell>
+                <TableRowCell>number</TableRowCell>
+                <TableRowCell>number</TableRowCell>
+                <TableRowCell>number</TableRowCell>
+                <TableRowCell>number</TableRowCell>
+                <TableRowCell>number</TableRowCell>
+            </TableRow>
+        }
+    </TableBody>
+</Table>
+
+@code
+{
+    [Parameter]
+    public List<int> Numbers { get; set; } = new List<int> { 1, 2, 3 };
+
+}

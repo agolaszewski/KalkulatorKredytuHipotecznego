@@ -1,5 +1,5 @@
-﻿using System;
-using KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Actions;
+﻿using KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Actions;
+using System;
 
 namespace KalkulatorKredytuHipotecznego.Store.States
 {
@@ -7,12 +7,15 @@ namespace KalkulatorKredytuHipotecznego.Store.States
     {
         public CalculationState()
         {
+            var today = DateTime.Today;
+
             _creditAmount = 0;
             _creditPeriods = 0;
             _creditPeriodType = PeriodType.Years;
             _margin = 0;
             _warsawInterbankOfferedRate = 0;
-            _firstInstalmentDate = DateTime.Today;
+            _firstInstalmentDate = today;
+            _creditOpening = new DateTime(today.Year, today.Month, 1);
             _instalmentType = InstalmentType.Flat;
         }
 
@@ -41,28 +44,28 @@ namespace KalkulatorKredytuHipotecznego.Store.States
         public decimal Margin
         {
             get => _margin;
-            set => OnChange(ref _margin, value);
+            set => OnChange(ref _margin, value, new MarginValueChanged());
         }
 
         private decimal _warsawInterbankOfferedRate;
         public decimal WarsawInterbankOfferedRate
         {
             get => _warsawInterbankOfferedRate;
-            set => OnChange(ref _warsawInterbankOfferedRate, value);
+            set => OnChange(ref _warsawInterbankOfferedRate, value, new WarsawInterbankOfferedRateValueChanged());
         }
 
         private DateTime _firstInstalmentDate;
         public DateTime FirstInstalmentDate
         {
             get => _firstInstalmentDate;
-            set => OnChange(ref _firstInstalmentDate, value);
+            set => OnChange(ref _firstInstalmentDate, value, new FirstInstalmentDateValueChanged());
         }
 
         private DateTime _creditOpening;
         public DateTime CreditOpening
         {
             get => _creditOpening;
-            set => OnChange(ref _creditOpening, value);
+            set => OnChange(ref _creditOpening, value, new CreditOpeningValueChanged());
         }
 
         private InstalmentType _instalmentType;
@@ -71,17 +74,7 @@ namespace KalkulatorKredytuHipotecznego.Store.States
             get => _instalmentType;
             set => OnChange(ref _instalmentType, value);
         }
-    }
 
-    public enum PeriodType
-    {
-        Months = 1,
-        Years = 2
-    }
-
-    public enum InstalmentType
-    {
-        Flat = 1,
-        Decreasing = 2
+        public decimal TotalMargin { get; set; }
     }
 }
