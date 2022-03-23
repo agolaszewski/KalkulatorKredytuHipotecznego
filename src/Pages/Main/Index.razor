@@ -1,5 +1,9 @@
 ﻿@page "/"
 
+@using KalkulatorKredytuHipotecznego.Store
+@using KalkulatorKredytuHipotecznego.Store.States
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
 <Tabs Justified="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
     <Items>
         <Tab Name="propertyAcquisitionDetails">Kosztu nabycia nieruchomości</Tab>
@@ -19,11 +23,10 @@
     </Content>
 </Tabs>
 
-@code{
-    string selectedTab = "basicDetails";
+<Container>
+    <Button Color="Color.Primary" Clicked="@OnCalculateButtonClicked">Policz</Button>
+</Container>
 
-    private void OnSelectedTabChanged( string name )
-    {
-        selectedTab = name;
-    }
-}
+<Container>
+    <Schedule Numbers="@Numbers"></Schedule>
+</Container>

@@ -25,6 +25,7 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             {
                 PeriodType.Months => 50 * 12,
                 PeriodType.Years => 50,
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
     }
