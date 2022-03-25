@@ -20,7 +20,7 @@ public class FlatInstalmentsCalculationStrategy : IInstalmentCalculationStrategy
 {
     public Instalment Execute(CreditAmount creditAmount, CreditPeriods creditPeriods, Interest interest, Days instalmentPeriod)
     {
-        var result = -Financial.Pmt((double)(interest.Value / 100 / 12M), creditPeriods.Value, (double)creditAmount.Value);
+        var result = -Financial.Pmt((double)(interest.Value / 12M), creditPeriods.Value, (double)creditAmount.Value);
         result = Math.Round(result, 2);
         return new Instalment((decimal)result, interest, creditAmount, instalmentPeriod);
     }

@@ -1,5 +1,5 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record Margin : ValueObject<decimal>
+public partial record Margin : ValueObject<decimal>
 {
 }

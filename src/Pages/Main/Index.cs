@@ -1,6 +1,5 @@
 ﻿using Fluxor;
 using Fluxor.Blazor.Web.Components;
-using KalkulatorKredytuHipotecznego.Domain;
 using KalkulatorKredytuHipotecznego.Store.States;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
@@ -31,9 +30,6 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
 
         private void OnCalculateButtonClicked()
         {
-            var xd = new FlatInstalmentsCalculationStrategy();
-
-            var lol = xd.Execute(160000.0M, new Years(10) , 2.37M, null);
             Numbers.Add(Numbers.Count + 1);
         }
     }

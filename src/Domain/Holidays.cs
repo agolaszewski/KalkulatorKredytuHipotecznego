@@ -6,8 +6,8 @@ namespace KalkulatorKredytuHipotecznego.Domain;
 
 public class Holidays
 {
-    private Dictionary<int, IReadOnlyList<Holiday>> _movable = new Dictionary<int, IReadOnlyList<Holiday>>();
-    private IReadOnlyList<Holiday> _static;
+    private readonly Dictionary<int, IReadOnlyList<Holiday>> _movable = new();
+    private readonly IReadOnlyList<Holiday> _static;
 
     public Holidays()
     {

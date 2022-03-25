@@ -13,6 +13,6 @@ public record Interest : ValueObject<decimal>
 
     public static implicit operator Interest(decimal value)
     {
-        return new Interest() { Value = value };
+        return new Interest() { Value = value / 100M };
     }
 }

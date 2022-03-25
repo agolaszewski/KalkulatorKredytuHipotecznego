@@ -1,12 +1,14 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Fluxor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using KalkulatorKredytuHipotecznego.Domain;
+using Margin = KalkulatorKredytuHipotecznego.Domain.Margin;
 
 namespace KalkulatorKredytuHipotecznego
 {
@@ -14,6 +16,10 @@ namespace KalkulatorKredytuHipotecznego
     {
         public static async Task Main(string[] args)
         {
+
+            var margin = new Margin();
+            var xd = margin.Test(1.0M);
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
             builder.Services

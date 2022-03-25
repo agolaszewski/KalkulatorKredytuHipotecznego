@@ -1,11 +1,12 @@
-﻿namespace KalkulatorKredytuHipotecznego.Domain;
+﻿using System;
+namespace KalkulatorKredytuHipotecznego.Domain;
 
 public record Instalment
 {
     public Instalment(decimal value, Interest interest, CreditAmount creditAmount, Days instalmentPeriod)
     {
         Total = value;
-        Interest = creditAmount.Value * interest.Value * (instalmentPeriod.Value / 365M);
+        Interest = Math.Round(creditAmount.Value * interest.Value * (instalmentPeriod.Value / 365M),2);
         Principal = Total - Interest;
     }
 
