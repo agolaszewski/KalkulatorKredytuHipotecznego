@@ -1,6 +1,6 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public interface IInstalmentCalculationStrategy
+public interface IInstallmentCalculationStrategy
 {
-    Instalment Execute(CreditAmount creditAmount, CreditPeriods creditPeriods, Interest interest, Days instalmentPeriod);
+    Installment Execute(CreditAmount creditAmount, CreditPeriods creditPeriods, Interest interest);
 }

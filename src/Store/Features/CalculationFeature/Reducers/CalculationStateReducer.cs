@@ -41,11 +41,11 @@ namespace KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Reduce
         {
             var creditOpening = state.CreditOpening;
 
-            if (state.FirstInstalmentDate < creditOpening)
+            if (state.FirstInstallmentDate < creditOpening)
             {
                 return state with
                 {
-                    FirstInstalmentDate = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day),
+                    FirstInstallmentDate = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day),
                     CreditOpening = creditOpening,
                 };
             }
@@ -54,20 +54,20 @@ namespace KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Reduce
         }
 
         [ReducerMethod]
-        public static CalculationState FirstInstalmentDateValueChangedReducer(CalculationState state, FirstInstalmentDateValueChanged _)
+        public static CalculationState FirstInstallmentDateValueChangedReducer(CalculationState state, FirstInstallmentDateValueChanged _)
         {
-            var firstInstalmentDate = state.FirstInstalmentDate;
+            var firstInstallmentDate = state.FirstInstallmentDate;
 
-            if (state.CreditOpening > firstInstalmentDate)
+            if (state.CreditOpening > firstInstallmentDate)
             {
                 return state with
                 {
-                    CreditOpening = new DateTime(firstInstalmentDate.Year, firstInstalmentDate.Month, firstInstalmentDate.Day),
-                    FirstInstalmentDate = firstInstalmentDate,
+                    CreditOpening = new DateTime(firstInstallmentDate.Year, firstInstallmentDate.Month, firstInstallmentDate.Day),
+                    FirstInstallmentDate = firstInstallmentDate,
                 };
             }
 
-            return state with { FirstInstalmentDate = state.FirstInstalmentDate };
+            return state with { FirstInstallmentDate = state.FirstInstallmentDate };
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record CreditPeriods : ValueObject<int>
+public partial record CreditPeriods : ValueObject<int>
 {
     public CreditPeriods(Years years)
     {

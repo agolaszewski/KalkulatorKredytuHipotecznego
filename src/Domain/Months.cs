@@ -1,9 +1,10 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record Months : ValueObject<int>
+public partial record Months : ValueObject<int>
 {
     public static Months From(Years years)
     {
-        return new Months() { Value = years.Value * 12 };
+        int value = years.Value * 12;
+        return new Months(value);
     }
 }

@@ -25,4 +25,10 @@
 		                  OutputItemType="Analyzer"
 		                  ReferenceOutputAssembly="false" />
 	</ItemGroup>
+
+	<!--<PropertyGroup>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+	</PropertyGroup>-->
+
 </Project>

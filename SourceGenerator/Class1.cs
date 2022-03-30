@@ -1,9 +1,10 @@
-﻿using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SourceGenerator
 {
@@ -12,65 +13,73 @@ namespace SourceGenerator
     {
         public void Execute(GeneratorExecutionContext context)
         {
-            // begin creating the source we'll inject into the users compilation
-
-            //context.AddSource($"logs.g.cs", SourceText.From(string.Join(Environment.NewLine, context.Compilation.SyntaxTrees.Select(s => s.FilePath)), Encoding.UTF8));
-
-            var regex = new Regex(@"<(.*?)>");
-
-            foreach (var tree in context.Compilation.SyntaxTrees)
+            try
             {
-                var records = tree.GetRoot().DescendantNodes()
-                    .Where(x => x is RecordDeclarationSyntax)
-                    .Cast<RecordDeclarationSyntax>()
-                    .ToList();
+                var regex = new Regex(@"<(.*?)>");
 
-                if (!records.Any())
+                foreach (var tree in context.Compilation.SyntaxTrees)
                 {
-                    continue;
-                }
+                    var records = tree.GetRoot().DescendantNodes()
+                        .Where(x => x is RecordDeclarationSyntax)
+                        .Cast<RecordDeclarationSyntax>()
+                        .ToList();
 
-                var usings = tree.GetRoot().DescendantNodes()
-                    .Where(x => x is UsingDirectiveSyntax)
-                    .Cast<UsingDirectiveSyntax>()
-                    .Select(x => x.ToString()).ToList();
+                    if (!records.Any())
+                    {
+                        continue;
+                    }
 
-                var usingsText = string.Join(" ", usings);
+                    var usings = tree.GetRoot().DescendantNodes()
+                        .Where(x => x is UsingDirectiveSyntax)
+                        .Cast<UsingDirectiveSyntax>()
+                        .Select(x => x.ToString()).ToList();
 
-                var valueObject = records
-                    .FirstOrDefault(r => r.BaseList != null && r.BaseList.Types.Any(t => t.ToString().Contains("ValueObject")));
+                    var usingText = string.Join(" ", usings);
 
-                if (valueObject == null)
-                {
-                    continue;
-                }
+                    var valueObject = records
+                        .FirstOrDefault(r => r.BaseList != null && r.BaseList.Types.Any(t => t.ToString().Contains("ValueObject")));
 
-                var name = valueObject.Identifier.ToString();
+                    if (valueObject == null)
+                    {
+                        continue;
+                    }
 
-                if (name != "Margin")
-                {
-                    continue;
-                }
+                    var name = valueObject.Identifier.ToString();
 
-                var generic = valueObject.BaseList.Types.Select(t => regex.Match(t.ToString()).Groups[1].Value).First();
-                var @namespace = (valueObject.Parent as FileScopedNamespaceDeclarationSyntax).Name.ToString();
+                    var generic = valueObject.BaseList.Types.Select(t => regex.Match(t.ToString()).Groups[1].Value).FirstOrDefault();
+                    var @namespace = (valueObject.Parent as FileScopedNamespaceDeclarationSyntax).Name.ToString();
 
-                var sourceBuilder = new StringBuilder($@"
-{usingsText}
+                    var sourceBuilder = new StringBuilder($@"
+{usingText}
 
 namespace {@namespace};
 
 public partial record {name} : ValueObject<{generic}>
 {{
-    public {generic} Test({generic} value)
+    public {name}({generic} value)
     {{
-        return value;
+        Value = value;
+    }}
+
+    public static implicit operator {name}({generic} value)
+    {{
+        return new {name}(value);
+    }}
+
+    public static explicit operator {generic}({name} value)
+    {{
+        return value.Value;
     }}
 }}
 ");
-                var dbg = sourceBuilder.ToString();
-                // inject the created source into the users compilation
-                context.AddSource($"{name}.g.cs", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
+                    var dbg = sourceBuilder.ToString();
+                    // inject the created source into the users compilation
+                    context.AddSource($"{name}.g.cs", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.StackTrace);
             }
         }
 

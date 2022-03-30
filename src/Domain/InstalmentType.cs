@@ -1,12 +1,8 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record InstalmentType : ValueObject<Store.States.InstalmentType>
+public partial record InstallmentType : ValueObject<Store.States.InstallmentType>
 {
-
-    public static implicit operator InstalmentType(Store.States.InstalmentType value)
-    {
-        return new InstalmentType() {Value = value};
-    }
-
-    private IInstalmentCalculationStrategy Strategy => Value == Store.States.InstalmentType.Decreasing ? new DecreasingInstalmentsCalculationStrategy() : null;
+    public IInstallmentCalculationStrategy Strategy => Value == Store.States.InstallmentType.Decreasing
+        ? new DecreasingInstallmentsCalculationStrategy()
+        : new FlatInstallmentsCalculationStrategy();
 }

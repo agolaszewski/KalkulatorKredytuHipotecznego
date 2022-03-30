@@ -1,5 +1,5 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record WarsawInterbankOfferedRate : ValueObject<decimal>
+public partial record WarsawInterbankOfferedRate : ValueObject<decimal>
 {
 }

@@ -69,14 +69,14 @@
     </Column>
     <Column>
         <FormField Text="Dzien pobrania pierwszej raty">
-            <DateEdit TValue="DateTime" @bind-Date="State.Value.FirstInstalmentDate" />
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.FirstInstallmentDate" />
         </FormField>
     </Column>
     <Column>
         <FormField Text="Rodzaj rat">
-            <RadioGroup TValue="InstalmentType" Buttons="true" @bind-CheckedValue="State.Value.InstalmentType" Display="Display.Flex">
-                <Radio Value="@InstalmentType.Flat">Rowne</Radio>
-                <Radio Value="@InstalmentType.Decreasing">Malejace</Radio>
+            <RadioGroup TValue="InstallmentType" Buttons="true" @bind-CheckedValue="State.Value.InstallmentType" Display="Display.Flex">
+                <Radio Value="@InstallmentType.Flat">Rowne</Radio>
+                <Radio Value="@InstallmentType.Decreasing">Malejace</Radio>
             </RadioGroup>
         </FormField>
     </Column>

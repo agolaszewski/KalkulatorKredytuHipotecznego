@@ -1,7 +1,9 @@
 ﻿using Fluxor;
 using Fluxor.Blazor.Web.Components;
+using KalkulatorKredytuHipotecznego.Domain;
 using KalkulatorKredytuHipotecznego.Store.States;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 
 namespace KalkulatorKredytuHipotecznego.Pages.Main
@@ -26,11 +28,57 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             selectedTab = name;
         }
 
-        private List<int> Numbers = new List<int>();
+        private List<InstallmentDetails> Installments = new();
 
         private void OnCalculateButtonClicked()
         {
-            Numbers.Add(Numbers.Count + 1);
+            IInstallmentCalculationStrategy strategy = new Domain.InstallmentType(State.Value.InstallmentType).Strategy;
+            CreditAmount creditAmount = State.Value.CreditAmount;
+            CreditPeriods creditPeriods = State.Value.CreditPeriodType == PeriodType.Months ? new Months(State.Value.CreditPeriods) : new Years(State.Value.CreditPeriods);
+
+            Interest interest = new Interest(State.Value.Margin / 100, State.Value.WarsawInterbankOfferedRate / 100);
+            InstallmentDate installmentDate = State.Value.FirstInstallmentDate;
+
+            var schedule = new ScheduleCalculator();
+            Installments = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest);
+        }
+    }
+
+    public class ScheduleCalculator
+    {
+        public List<InstallmentDetails> Calculate(IInstallmentCalculationStrategy strategy, CreditAmount creditAmount,
+            CreditOpening creditOpening, CreditPeriods creditPeriods, InstallmentDate installmentDate, Interest interest)
+        {
+            var installments = new List<InstallmentDetails>();
+            Installment baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
+
+            DateTime from = creditOpening.Value;
+            DateTime to = installmentDate.Value;
+
+            int index = 0;
+            while (creditPeriods.Value > 1)
+            {
+                if (creditAmount.Value < baseInstallment.Value)
+                {
+                    baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
+                }
+
+                var installmentPeriod = Days.Difference(from, to);
+                var installment = new InstallmentDetails(++index, to, baseInstallment, interest, creditAmount, installmentPeriod);
+
+                installments.Add(installment);
+
+                creditPeriods = creditPeriods.Value - 1;
+                creditAmount = creditAmount.Value - installment.Principal;
+
+                from = to;
+                to = from.AddMonths(1);
+            }
+
+            var lastInstallmentDetails = InstallmentDetails.LastInstallment(++index, to, interest, creditAmount, Days.Difference(from, to));
+            installments.Add(lastInstallmentDetails);
+
+            return installments;
         }
     }
 }

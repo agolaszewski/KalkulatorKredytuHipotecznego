@@ -2,6 +2,6 @@
 
 namespace KalkulatorKredytuHipotecznego.Domain;
 
-public record InstalmentDate : ValueObject<DateTime>
+public partial record InstallmentDate : ValueObject<DateTime>
 {
 }

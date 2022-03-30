@@ -1,24 +1,26 @@
-﻿<Table>
+﻿@using KalkulatorKredytuHipotecznego.Domain
+<Table>
     <TableHeader>
         <TableRow>
-            <TableHeaderCell>Data</TableHeaderCell>
-            <TableHeaderCell>Rata</TableHeaderCell>
-            <TableHeaderCell>Odsetki</TableHeaderCell>
+            <TableHeaderCell>Number raty</TableHeaderCell>
+            <TableHeaderCell>Data płatności</TableHeaderCell>
+            <TableHeaderCell>Kwota</TableHeaderCell>
             <TableHeaderCell>Kapitał</TableHeaderCell>
-            <TableHeaderCell>Pozostało do spłaty</TableHeaderCell>
+            <TableHeaderCell>Odsetki</TableHeaderCell>
+            <TableHeaderCell>Saldo</TableHeaderCell>
             <TableHeaderCell>Koszty okołokredytowe</TableHeaderCell>
         </TableRow>
     </TableHeader>
     <TableBody>
-        @foreach (var number in Numbers)
+        @foreach (var installment in Installments)
         {
             <TableRow>
-                <TableRowCell>@number</TableRowCell>
-                <TableRowCell>number</TableRowCell>
-                <TableRowCell>number</TableRowCell>
-                <TableRowCell>number</TableRowCell>
-                <TableRowCell>number</TableRowCell>
-                <TableRowCell>number</TableRowCell>
+                <TableRowCell>@installment.Index</TableRowCell>
+                <TableRowCell>@installment.InstallmentDate.ToShortDateString()</TableRowCell>
+                <TableRowCell>@Math.Round(@installment.Installment,2)</TableRowCell>
+                <TableRowCell>@Math.Round(@installment.Principal,2)</TableRowCell>
+                <TableRowCell>@Math.Round(@installment.Interest,2)</TableRowCell>
+                <TableRowCell>@Math.Round(@installment.CreditAmount,2)</TableRowCell>
             </TableRow>
         }
     </TableBody>
@@ -27,6 +29,6 @@
 @code
 {
     [Parameter]
-    public List<int> Numbers { get; set; } = new List<int> { 1, 2, 3 };
+    public List<InstallmentDetails> Installments { get; set; } = new();
 
 }

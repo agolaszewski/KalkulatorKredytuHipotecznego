@@ -1,23 +1,16 @@
-﻿namespace KalkulatorKredytuHipotecznego.Domain;
+﻿using System;
 
-public record Days : ValueObject<int>
+namespace KalkulatorKredytuHipotecznego.Domain;
+
+public partial record Days : ValueObject<int>
 {
-    private Days()
-    {
-    }
-
     public Days(double value)
     {
         Value = (int)value;
     }
 
-    public static Days Difference(CreditOpening creditOpening, InstalmentDate instalmentDate)
+    public static Days Difference(DateTime from, DateTime to)
     {
-        return new Days((instalmentDate.Value - creditOpening.Value).TotalDays);
-    }
-
-    public static implicit operator Days(int value)
-    {
-        return new Days() { Value = value };
+        return new Days((to - from).TotalDays);
     }
 }
