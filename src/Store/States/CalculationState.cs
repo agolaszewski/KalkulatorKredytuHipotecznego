@@ -16,7 +16,7 @@ namespace KalkulatorKredytuHipotecznego.Store.States
             _warsawInterbankOfferedRate = 0;
             _firstInstallmentDate = today;
             _creditOpening = new DateTime(today.Year, today.Month, 1);
-            _InstallmentType = InstallmentType.Flat;
+            _installmentType = InstallmentType.Flat;
         }
 
         private decimal _creditAmount;
@@ -68,11 +68,18 @@ namespace KalkulatorKredytuHipotecznego.Store.States
             set => OnChange(ref _creditOpening, value, new CreditOpeningValueChanged());
         }
 
-        private InstallmentType _InstallmentType;
+        private InstallmentType _installmentType;
         public InstallmentType InstallmentType
         {
-            get => _InstallmentType;
-            set => OnChange(ref _InstallmentType, value);
+            get => _installmentType;
+            set => OnChange(ref _installmentType, value);
+        }
+
+        private int _warsawInterbankOfferedRatePeriod;
+        public int WarsawInterbankOfferedRatePeriod
+        {
+            get => _warsawInterbankOfferedRatePeriod;
+            set => OnChange(ref _warsawInterbankOfferedRatePeriod, value);
         }
 
         public decimal TotalMargin { get; set; }

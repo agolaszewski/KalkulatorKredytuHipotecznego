@@ -49,6 +49,14 @@
         </FormField>
     </Column>
     <Column>
+        <FormField Text="Wibor">
+            <RadioGroup TValue="int" Buttons="true" @bind-CheckedValue="State.Value.WarsawInterbankOfferedRatePeriod" Display="Display.Flex">
+                <Radio Value="3">3M</Radio>
+                <Radio Value="6">6M</Radio>
+            </RadioGroup>
+        </FormField>
+    </Column>
+    <Column>
         <FormField Text="Oprocentowanie">
             <Addons>
                 <Addon AddonType="AddonType.Body">

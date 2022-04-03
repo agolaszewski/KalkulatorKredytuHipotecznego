@@ -1,5 +1,7 @@
 ﻿using KalkulatorKredytuHipotecznego.Store.States;
 
+namespace KalkulatorKredytuHipotecznego.Domain;
+
 public partial record MortgageLoan
 {
     public MortgageLoan(CalculationState state)
@@ -7,5 +9,5 @@ public partial record MortgageLoan
         InstallmentType = state.InstallmentType;
     }
 
-    InstallmentType InstallmentType { get; set; }
+    Store.States.InstallmentType InstallmentType { get; set; }
 }
