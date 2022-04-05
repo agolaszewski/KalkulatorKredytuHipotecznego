@@ -25,6 +25,26 @@
 </Row>
 <Row>
     <Column>
+        <FormField Text="Otwarcie kredytu">
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.CreditOpening" />
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Dzien pobrania pierwszej raty">
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.FirstInstallmentDate" />
+        </FormField>
+    </Column>
+    <Column>
+        <FormField Text="Rodzaj rat">
+            <RadioGroup TValue="InstallmentType" Buttons="true" @bind-CheckedValue="State.Value.InstallmentType" Display="Display.Flex">
+                <Radio Value="@InstallmentType.Flat">Rowne</Radio>
+                <Radio Value="@InstallmentType.Decreasing">Malejace</Radio>
+            </RadioGroup>
+        </FormField>
+    </Column>
+</Row>
+<Row>
+    <Column>
         <FormField Text="Marża">
             <Addons>
                 <Addon AddonType="AddonType.Body">
@@ -49,14 +69,6 @@
         </FormField>
     </Column>
     <Column>
-        <FormField Text="Wibor">
-            <RadioGroup TValue="int" Buttons="true" @bind-CheckedValue="State.Value.WarsawInterbankOfferedRatePeriod" Display="Display.Flex">
-                <Radio Value="3">3M</Radio>
-                <Radio Value="6">6M</Radio>
-            </RadioGroup>
-        </FormField>
-    </Column>
-    <Column>
         <FormField Text="Oprocentowanie">
             <Addons>
                 <Addon AddonType="AddonType.Body">
@@ -68,23 +80,11 @@
             </Addons>
         </FormField>
     </Column>
-</Row>
-<Row>
     <Column>
-        <FormField Text="Otwarcie kredytu">
-            <DateEdit TValue="DateTime" @bind-Date="State.Value.CreditOpening" />
-        </FormField>
-    </Column>
-    <Column>
-        <FormField Text="Dzien pobrania pierwszej raty">
-            <DateEdit TValue="DateTime" @bind-Date="State.Value.FirstInstallmentDate" />
-        </FormField>
-    </Column>
-    <Column>
-        <FormField Text="Rodzaj rat">
-            <RadioGroup TValue="InstallmentType" Buttons="true" @bind-CheckedValue="State.Value.InstallmentType" Display="Display.Flex">
-                <Radio Value="@InstallmentType.Flat">Rowne</Radio>
-                <Radio Value="@InstallmentType.Decreasing">Malejace</Radio>
+        <FormField Text="Wibor">
+            <RadioGroup TValue="int" Buttons="true" @bind-CheckedValue="State.Value.WarsawInterbankOfferedRatePeriod" Display="Display.Flex">
+                <Radio Value="3">3M</Radio>
+                <Radio Value="6">6M</Radio>
             </RadioGroup>
         </FormField>
     </Column>

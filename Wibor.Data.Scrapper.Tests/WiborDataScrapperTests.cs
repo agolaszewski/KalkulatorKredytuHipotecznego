@@ -14,7 +14,7 @@ namespace Wibor.Data.Scrapper.Tests
         public async Task Check()
         {
             var scrapper = new Wibor.Scrapper.Scrapper();
-            await scrapper.ExecuteFor3MAsync(new DateTime(2021, 12, 1), new DateTime(2021, 12, 31));
+            await scrapper.ExecuteAsync(new DateTime(2021, 12, 1), new DateTime(2021, 12, 31), "WIBOR3M");
         }
     }
 }

@@ -39,15 +39,18 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             Interest interest = new Interest(State.Value.Margin / 100, State.Value.WarsawInterbankOfferedRate / 100);
             InstallmentDate installmentDate = State.Value.FirstInstallmentDate;
 
+            WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod = WarsawInterbankOfferedRatePeriod.Create(State.Value.WarsawInterbankOfferedRatePeriod);
+
             var schedule = new ScheduleCalculator();
-            Installments = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest);
+            Installments = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest, wiborInterbankOfferedRatePeriodRatePeriod);
         }
     }
 
     public class ScheduleCalculator
     {
         public List<InstallmentDetails> Calculate(IInstallmentCalculationStrategy strategy, CreditAmount creditAmount,
-            CreditOpening creditOpening, CreditPeriods creditPeriods, InstallmentDate installmentDate, Interest interest)
+            CreditOpening creditOpening, CreditPeriods creditPeriods, InstallmentDate installmentDate,
+            Interest interest, WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod)
         {
             var installments = new List<InstallmentDetails>();
             Installment baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
@@ -58,7 +61,7 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             int index = 0;
             while (creditPeriods.Value > 1)
             {
-                if (creditAmount.Value < baseInstallment.Value)
+                if (index % wiborInterbankOfferedRatePeriodRatePeriod.Value == 0)
                 {
                     baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
                 }

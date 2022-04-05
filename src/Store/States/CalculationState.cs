@@ -9,14 +9,15 @@ namespace KalkulatorKredytuHipotecznego.Store.States
         {
             var today = DateTime.Today;
 
-            _creditAmount = 0;
-            _creditPeriods = 0;
-            _creditPeriodType = PeriodType.Years;
-            _margin = 0;
-            _warsawInterbankOfferedRate = 0;
+            _creditAmount = 300000;
+            _creditPeriods = 240;
+            _creditPeriodType = PeriodType.Months;
+            _margin = 2;
+            _warsawInterbankOfferedRate = 5;
             _firstInstallmentDate = today;
             _creditOpening = new DateTime(today.Year, today.Month, 1);
             _installmentType = InstallmentType.Flat;
+            _warsawInterbankOfferedRatePeriod = 3;
         }
 
         private decimal _creditAmount;
