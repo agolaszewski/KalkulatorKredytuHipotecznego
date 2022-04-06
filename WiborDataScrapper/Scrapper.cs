@@ -49,5 +49,3 @@ namespace Wibor.Scrapper
         }
     }
 }
-
-
