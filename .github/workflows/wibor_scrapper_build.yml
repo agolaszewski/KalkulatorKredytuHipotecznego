@@ -1,0 +1,25 @@
+name: Wibor Scrapper
+
+on:
+  push:
+    paths:
+      - 'WiborDataScrapper/**'
+      - 'Wibor.Scrapper.Runner/**'
+
+concurrency: 
+  group: ${GITHUB_REF#refs/heads/} 
+  cancel-in-progress: true
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj
+    - name: Build
+      run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj --no-restore
