@@ -21,6 +21,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -r linux-x64
     - name: Build
-      run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -c Release -r linux-x64 --no-restore
+      run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -c Release -r linux-x64 --no-restore --self-contained false
     - name: Publish
       run: dotnet publish ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj --no-build -c Release -o release -r linux-x64 -p:PublishSingleFile=true --self-contained false
