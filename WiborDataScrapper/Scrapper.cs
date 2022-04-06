@@ -45,6 +45,7 @@ namespace Wibor.Scrapper
                 } while (line != null);
             }
 
+
             return result;
         }
     }
