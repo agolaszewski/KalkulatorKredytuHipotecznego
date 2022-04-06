@@ -2,9 +2,8 @@ name: Wibor Scrapper Build
 
 on:
   push:
-    paths:
-      - 'WiborDataScrapper/**'
-      - 'Wibor.Scrapper.Runner/**'
+    branches:
+      - master
 
 concurrency: 
   group: ${GITHUB_REF#refs/heads/} 
@@ -20,8 +19,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -r linux-x64
+      run: dotnet restore ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj 
     - name: Build
-      run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -r linux-x64 --no-restore
+      run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -c Release --no-restore
     - name: Publish
       run: dotnet publish ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj --no-build -c Release -o release -r linux-x64 -p:PublishSingleFile=true --self-contained false
