@@ -23,3 +23,5 @@ jobs:
       run: dotnet restore ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj
     - name: Build
       run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj --no-restore
+    - name: Publish
+      run: dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false
