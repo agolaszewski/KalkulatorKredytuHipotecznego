@@ -1,4 +1,4 @@
-name: Wibor Scrapper
+name: Wibor Scrapper Build
 
 on:
   push:
