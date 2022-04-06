@@ -24,3 +24,10 @@ jobs:
       run: dotnet build ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj -c Release -r linux-x64 --no-restore --self-contained false
     - name: Publish
       run: dotnet publish ./Wibor.Scrapper.Runner/Wibor.Scrapper.Runner.csproj --no-build -c Release -o release -r linux-x64 -p:PublishSingleFile=true --self-contained false
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        # Artifact name
+        name: WiborRunnerExecutable
+        path: /home/runner/work/KalkulatorKredytuHipotecznego/KalkulatorKredytuHipotecznego/release/
+      
