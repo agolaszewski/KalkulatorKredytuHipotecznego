@@ -1,26 +1,30 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using System.Globalization;
 
-namespace Wibor.Scrapper.Runner // Note: actual namespace depends on the project name.
+namespace Wibor.Scrapper.Runner
 {
     internal class Program
     {
-        private static CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        private static readonly CsvConfiguration Config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Delimiter = ";",
             HasHeaderRecord = false
         };
+
+        private static readonly TypeConverterOptions CsvOptions = new TypeConverterOptions { Formats = new[] { "yyyy-MM-dd" } };
 
         private static async Task Main(string[] args)
         {
             DateTime from = DateTime.ParseExact(args[0], "yyyy-MM-dd", null);
             DateTime to = DateTime.ParseExact(args[1], "yyyy-MM-dd", null);
 
-            IReadOnlyList<Wibor> output = await new Scrapper().ExecuteAsync(from, to, args[2]);
+            var output = await new Scrapper(new HttpClient()).ExecuteAsync(from, to, "PLOPLN3M");
 
             await using var writer = Console.Out;
-            await using var csv = new CsvWriter(writer, config);
+            await using var csv = new CsvWriter(writer, Config);
+            csv.Context.TypeConverterOptionsCache.AddOptions<DateTime>(CsvOptions);
             await csv.WriteRecordsAsync(output);
         }
     }

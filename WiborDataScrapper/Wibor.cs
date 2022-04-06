@@ -8,7 +8,7 @@ namespace Wibor.Scrapper
         public Wibor(string date, string value)
         {
             Date = DateTime.ParseExact(date, "yyyy-MM-dd", null);
-            Value = decimal.Parse(value, new NumberFormatInfo() { NumberDecimalSeparator = "," });
+            Value = decimal.Parse(value, new NumberFormatInfo() { NumberDecimalSeparator = "." });
         }
 
         public Wibor(DateTime date, decimal value)
