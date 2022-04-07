@@ -1,8 +1,8 @@
 name: Update Wibor Rates
 
 on:
-  push:
-    branches: [ master ]
+  schedule:
+  - cron : "0 12 * * *"
 
 jobs:
   Update:
@@ -54,14 +54,15 @@ jobs:
     
     - name: Update PLOPLN3M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" $TODAY "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-04-01" $TODAY "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
            
     - name: Update PLOPLN6M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" $TODAY "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-04-01" $TODAY "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
            
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
         name: WiborData
         path: ./WiborData/
+        retention-days: 10
