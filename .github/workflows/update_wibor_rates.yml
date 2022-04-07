@@ -36,13 +36,13 @@ jobs:
       run: chmod 777 Wibor.Scrapper.Runner
       
     - name: Update PLOPLN3M
-      working-directory: ./WiborRunnerExecutable
       run: |
-           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
+           
     - name: Update PLOPLN6M
-      working-directory: ./WiborRunnerExecutable
       run: |
-           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
