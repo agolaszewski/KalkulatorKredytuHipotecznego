@@ -18,4 +18,7 @@ jobs:
       run: ls -l
     - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
-      run: sudo ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
+      run: chmod 777 Wibor.Scrapper.Runner
+    - name: Update PLOPLN3M
+      working-directory: ./WiborRunnerExecutable
+      run: ls -a./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
