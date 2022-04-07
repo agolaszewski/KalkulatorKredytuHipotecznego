@@ -2,8 +2,9 @@ name: Wibor Scrapper Build
 
 on:
   push:
-    branches:
-      - master
+    paths:
+      - 'WiborDataScrapper/**'
+      - 'Wibor.Scrapper.Runner/**'
 
 concurrency: 
   group: ${GITHUB_REF#refs/heads/} 
