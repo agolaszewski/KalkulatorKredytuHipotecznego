@@ -14,6 +14,7 @@ jobs:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
-        path: /artifacts
+    - name: Update PLOPLN3M
+      run: ls
     - name: Update PLOPLN3M
       run: /artifacts/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
