@@ -43,7 +43,7 @@ jobs:
                 github.rest.actions.listWorkflowRuns({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  workflow_id: update_wibor_rates.yml,
+                  workflow_id: update_wibor_rates,
                   status:success,
                   per_page:1
                 });
