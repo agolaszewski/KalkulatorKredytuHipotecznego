@@ -14,6 +14,7 @@ jobs:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
+        
     - name: Download Wibor Data
       continue-on-error: true
       uses: dawidd6/action-download-artifact@v2
@@ -22,13 +23,12 @@ jobs:
         workflow: update_wibor_rates.yml
         workflow_conclusion: success
         artifact: WiborData
+        
     - name: Check Wibor Data
       run: | 
            test -d ./WiborData && echo "WiborData exists" || mkdir -m 777 WiborData
-           ls
            test -f ./WiborData/PLOPLN3M.csv && echo "PLOPLN3M exists" || (touch ./WiborData/PLOPLN3M.csv && chmod 777 $_)
            test -f ./WiborData/PLOPLN6M.csv && echo "PLOPLN6M exists" || (touch ./WiborData/PLOPLN6M.csv && chmod 777 $_)
-           ls
       
     - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
@@ -37,8 +37,13 @@ jobs:
     - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
       run: |
-           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> WiborData/PLOPLN3M.csv
+           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
     - name: Update PLOPLN6M
       working-directory: ./WiborRunnerExecutable
       run: |
-           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> WiborData/PLOPLN6M.csv   
+           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: WiborData
+        path: ./WiborData/
