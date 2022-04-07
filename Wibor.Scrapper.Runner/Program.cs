@@ -20,7 +20,7 @@ namespace Wibor.Scrapper.Runner
             DateTime from = DateTime.ParseExact(args[0], "yyyy-MM-dd", null);
             DateTime to = DateTime.ParseExact(args[1], "yyyy-MM-dd", null);
 
-            var output = await new Scrapper(new HttpClient()).ExecuteAsync(from, to, "PLOPLN3M");
+            var output = await new Scrapper(new HttpClient()).ExecuteAsync(from, to, args[2]);
 
             await using var writer = Console.Out;
             await using var csv = new CsvWriter(writer, Config);
