@@ -34,8 +34,7 @@ jobs:
       run: echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
     - name: Test Parameters
       run: echo $TODAY
-    - name: GitHub Script
-    
+
     - name: Get Previous Workflow Successful Run 
       uses: actions/github-script@v6.0.0
       with:
@@ -44,7 +43,7 @@ jobs:
                 octokit.rest.actions.listWorkflowRuns({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  workflow_id: update_wibor_rates,
+                  workflow_id: update_wibor_rates.yml,
                   status:success,
                   per_page:1
                 });
