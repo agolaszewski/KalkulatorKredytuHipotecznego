@@ -17,4 +17,4 @@ jobs:
     - name: Update PLOPLN3M
       run: ls
     - name: Update PLOPLN3M
-      run: Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
+      run: .\Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
