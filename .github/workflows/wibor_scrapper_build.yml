@@ -5,7 +5,9 @@ on:
     paths:
       - 'WiborDataScrapper/**'
       - 'Wibor.Scrapper.Runner/**'
-
+  schedule:
+      - cron : "0 0 1 * *"
+  
 concurrency: 
   group: ${GITHUB_REF#refs/heads/} 
   cancel-in-progress: true
