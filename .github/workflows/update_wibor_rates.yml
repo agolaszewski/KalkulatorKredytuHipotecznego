@@ -14,8 +14,6 @@ jobs:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
-    - name: xd
-      run : chmod ugo+rwx WiborRunnerExecutable
     - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
-      run: ls -l & ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
+      run: ls -l & chmod +x ./Wibor.Scrapper.Runner & ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
