@@ -31,10 +31,10 @@ jobs:
            test -f ./WiborData/PLOPLN6M.csv && echo "PLOPLN6M exists" || (touch ./WiborData/PLOPLN6M.csv && chmod 777 $_)
            ls ./WiborData
       
-    - name: Update Executable Permissions
-      run: echo "GITHUB_SHA_SHORT=$(date +%Y:%m:%d -d "yesterday")" >> $GITHUB_ENV
-    - name: Test
-      run: echo $GITHUB_SHA_SHORT
+    - name: Set Parameters
+      run: echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+    - name: Test Parameters
+      run: echo $TODAY
   
     - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
@@ -42,11 +42,11 @@ jobs:
     
     - name: Update PLOPLN3M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" $TODAY "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
            
     - name: Update PLOPLN6M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" $TODAY "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
            
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
