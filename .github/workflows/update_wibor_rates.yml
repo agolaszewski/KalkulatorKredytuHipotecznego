@@ -40,7 +40,7 @@ jobs:
       with:
         # The script to run
         script: |
-                octokit.rest.actions.listWorkflowRuns({
+                github.rest.actions.listWorkflowRuns({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   workflow_id: update_wibor_rates.yml,
