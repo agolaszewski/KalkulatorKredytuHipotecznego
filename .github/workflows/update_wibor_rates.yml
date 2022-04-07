@@ -1,0 +1,16 @@
+name: Update Wibor Rates
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        workflow: workflow_name.yml
+        workflow_conclusion: success
