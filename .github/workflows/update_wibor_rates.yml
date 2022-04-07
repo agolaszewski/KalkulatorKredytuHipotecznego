@@ -14,17 +14,26 @@ jobs:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
-    - name: Download wibor file
+    - name: Download Wibor Data
+      continue-on-error: true
       uses: dawidd6/action-download-artifact@v2
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: update_wibor_rates.yml
         workflow_conclusion: success
         artifact: WiborData
+    - name: Check Wibor Data
+      run: ! -d "/WiborData" && mkdir WiborData
+      
     - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
       run: chmod 777 Wibor.Scrapper.Runner
+      
     - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
       run: |
            ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> PLOPLN3M.csv
+    - name: Update PLOPLN6M
+      working-directory: ./WiborRunnerExecutable
+      run: |
+           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN6M" >> PLOPLN6M.csv   
