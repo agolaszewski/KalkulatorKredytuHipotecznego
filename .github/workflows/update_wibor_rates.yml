@@ -32,9 +32,14 @@ jobs:
            ls ./WiborData
       
     - name: Update Executable Permissions
+      run: echo "GITHUB_SHA_SHORT=$(date +%Y:%m:%d -d "yesterday")" >> $GITHUB_ENV
+    - name: Test
+      run: echo $GITHUB_SHA_SHORT
+  
+    - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
       run: chmod 777 Wibor.Scrapper.Runner
-      
+    
     - name: Update PLOPLN3M
       run: |
            ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
