@@ -8,17 +8,23 @@ jobs:
   Update:
     runs-on: ubuntu-latest
     steps:
-    - name: Download artifact
+    - name: Download runner
       uses: dawidd6/action-download-artifact@v2
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
-    - name: Update PLOPLN3M
-      run: ls -l
-    - name: Update PLOPLN3M
+    - name: Download wibor file
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        workflow: update_wibor_rates.yml
+        workflow_conclusion: success
+        artifact: WiborData
+    - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
       run: chmod 777 Wibor.Scrapper.Runner
     - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
-      run: ls -a & ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
+      run: |
+           ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M" >> PLOPLN3M.csv
