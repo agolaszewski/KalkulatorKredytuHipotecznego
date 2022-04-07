@@ -15,7 +15,5 @@ jobs:
         workflow: wibor_scrapper_build.yml
         workflow_conclusion: success
     - name: Update PLOPLN3M
-      run: ls WiborRunnerExecutable 
-    - name: Update PLOPLN3M
       working-directory: ./WiborRunnerExecutable
-      run: ls & Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
+      run: ls & ./Wibor.Scrapper.Runner "2022-01-01" "2022-01-31" "PLOPLN3M"
