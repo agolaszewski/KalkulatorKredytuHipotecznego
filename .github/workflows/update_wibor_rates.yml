@@ -29,6 +29,7 @@ jobs:
            test -d ./WiborData && echo "WiborData exists" || mkdir -m 777 WiborData
            test -f ./WiborData/PLOPLN3M.csv && echo "PLOPLN3M exists" || (touch ./WiborData/PLOPLN3M.csv && chmod 777 $_)
            test -f ./WiborData/PLOPLN6M.csv && echo "PLOPLN6M exists" || (touch ./WiborData/PLOPLN6M.csv && chmod 777 $_)
+           ls ./WiborData
       
     - name: Update Executable Permissions
       working-directory: ./WiborRunnerExecutable
