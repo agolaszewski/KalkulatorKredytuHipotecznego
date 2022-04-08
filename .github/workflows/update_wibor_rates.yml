@@ -2,7 +2,7 @@ name: Update Wibor Rates
 
 on:
   push:
-    branches: [ master ]
+    paths: ".github/workflows/update_wibor_rates.yml"
   schedule:
   - cron : "0 12 * * *"
 
