@@ -1,6 +1,8 @@
 name: Update Wibor Rates
 
 on:
+  push:
+    branches: [ master ]
   schedule:
   - cron : "0 12 * * *"
 
@@ -28,13 +30,14 @@ jobs:
            test -d ./WiborData && echo "WiborData exists" || mkdir -m 777 WiborData
            test -f ./WiborData/PLOPLN3M.csv && echo "PLOPLN3M exists" || (touch ./WiborData/PLOPLN3M.csv && chmod 777 $_)
            test -f ./WiborData/PLOPLN6M.csv && echo "PLOPLN6M exists" || (touch ./WiborData/PLOPLN6M.csv && chmod 777 $_)
+    - name: Update Executable Permissions
+      working-directory: ./WiborRunnerExecutable
+      run: chmod 777 Wibor.Scrapper.Runner
       
-    - name: Set Parameters
-      run: echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_ENV
-    - name: Test Parameters
-      run: echo $TODAY
+    - name: Set TO Parameter
+      run: echo "TO=$(date +%Y-%m-%d)" >> $GITHUB_ENV
 
-    - name: Get Previous Workflow Successful Run 
+    - name: Set FROM Parameter
       uses: actions/github-script@v6.0.0
       with:
         # The script to run
@@ -46,19 +49,26 @@ jobs:
                   status:"success",
                   per_page:1
                 });
-                console.log(run.data.workflow_runs[0].updated_at);
-        
-    - name: Update Executable Permissions
-      working-directory: ./WiborRunnerExecutable
-      run: chmod 777 Wibor.Scrapper.Runner
+                core.exportVariable('FROM', run.data.workflow_runs[0].updated_at)
+                console.log(core)
     
+    - name: Override Parameters
+      if: github.ref == 'refs/heads/master'
+      run: |
+           rm ./WiborData/PLOPLN6M.csv
+           rm ./WiborData/PLOPLN3M.csv
+           echo "FROM='1900-01-01'" >> $GITHUB_ENV
+    
+    - name: Test Parameters
+      run: echo $FROM $TO
+
     - name: Update PLOPLN3M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-04-01" $TODAY "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner $FROM $TO "PLOPLN3M" >> ./WiborData/PLOPLN3M.csv
            
     - name: Update PLOPLN6M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner "2022-04-01" $TODAY "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner $TO $TO "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
            
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
