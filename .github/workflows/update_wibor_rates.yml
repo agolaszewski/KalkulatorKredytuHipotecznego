@@ -67,7 +67,7 @@ jobs:
            
     - name: Update PLOPLN6M
       run: |
-           ./WiborRunnerExecutable/Wibor.Scrapper.Runner $TO $TO "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
+           ./WiborRunnerExecutable/Wibor.Scrapper.Runner $FROM $TO "PLOPLN6M" >> ./WiborData/PLOPLN6M.csv
            
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
