@@ -57,7 +57,7 @@ jobs:
       run: |
            rm ./WiborData/PLOPLN6M.csv
            rm ./WiborData/PLOPLN3M.csv
-           echo "FROM='1900-01-01'" >> $GITHUB_ENV
+           echo "FROM='2000-01-01'" >> $GITHUB_ENV
     
     - name: Test Parameters
       run: echo $FROM $TO
