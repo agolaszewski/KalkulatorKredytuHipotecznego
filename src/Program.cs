@@ -41,6 +41,8 @@ namespace KalkulatorKredytuHipotecznego
                 });
             });
 
+
+
             builder.RootComponents.Add<App>("#app");
 
             var host = builder.Build();

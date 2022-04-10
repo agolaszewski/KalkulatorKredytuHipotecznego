@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Data.Scrapper.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Scrapper.Runner", "..\Wibor.Scrapper.Runner\Wibor.Scrapper.Runner.csproj", "{ED751859-FD55-4F82-AE3A-77998B12DC59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers.Wibor", "..\Providers.Wibor\Providers.Wibor.csproj", "{6971EF3D-02E4-4965-94F1-D227C9AA56D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{6B64EA8A-5DE2-4588-B110-268B6743603E} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
 		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
 		{ED751859-FD55-4F82-AE3A-77998B12DC59} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
+		{6971EF3D-02E4-4965-94F1-D227C9AA56D5} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C3D233C-EEC2-41FD-8B61-7B101224194F}

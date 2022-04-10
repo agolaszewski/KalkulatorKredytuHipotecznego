@@ -78,6 +78,11 @@ public class Holidays
         return date.DayOfWeek == DayOfWeek.Sunday;
     }
 
+    private bool IsSaturday(DateTime date)
+    {
+        return date.DayOfWeek == DayOfWeek.Saturday;
+    }
+
     private bool IsHoliday(DateTime date)
     {
         return IsStaticHoliday(date) || IsMovableHoliday(date);
@@ -96,6 +101,6 @@ public class Holidays
 
     public bool IsFreeDay(DateTime date)
     {
-        return IsSunday(date) || IsHoliday(date);
+        return IsSaturday(date) || IsSunday(date) || IsHoliday(date);
     }
 }
