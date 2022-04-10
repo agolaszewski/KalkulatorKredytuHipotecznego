@@ -12,7 +12,7 @@ jobs:
     steps:
     
     - name: Event
-      run: echo "$GITHUB_CONTEXT"
+      run: echo '${{ toJSON(github) }}'
     
     - name: Download runner
       uses: dawidd6/action-download-artifact@v2
