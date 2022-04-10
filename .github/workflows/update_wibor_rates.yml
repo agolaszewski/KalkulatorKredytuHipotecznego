@@ -75,3 +75,11 @@ jobs:
         name: WiborData
         path: ./WiborData/
         retention-days: 10
+        
+    - name: Upload a Build Artifact  
+      uses: bacongobbler/azure-blob-storage-upload@main
+      with:
+        source_dir: ./WiborData
+        container_name: wibor
+        connection_string: ${{ secrets.BLOBCONNECTIONSTRING }}
+
