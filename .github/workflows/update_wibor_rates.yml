@@ -86,4 +86,5 @@ jobs:
         source_dir: ./WiborData
         container_name: wibor
         connection_string: ${{ secrets.BLOBCONNECTIONSTRING }}
+        overwrite: true
 
