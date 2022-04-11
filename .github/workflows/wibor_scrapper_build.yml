@@ -36,5 +36,5 @@ jobs:
       with:
         # Artifact name
         name: WiborRunnerExecutable
-        path: /home/runner/work/KalkulatorKredytuHipotecznego/KalkulatorKredytuHipotecznego/release/
+        path: /home/runner/work/KalkulatorKredytuHipotecznego/KalkulatorKredytuHipotecznego/src/release/
       
