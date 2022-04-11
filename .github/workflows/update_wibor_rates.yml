@@ -56,7 +56,7 @@ jobs:
                 core.exportVariable('FROM', run.data.workflow_runs[0].updated_at);
     
     - name: Override Parameters
-      if: github.ref == 'refs/heads/master'
+      if: github.event.schedule === null
       run: |
            rm ./WiborData/PLOPLN6M.csv
            rm ./WiborData/PLOPLN3M.csv
@@ -80,7 +80,7 @@ jobs:
         path: ./WiborData/
         retention-days: 10
         
-    - name: Upload a Build Artifact  
+    - name: Upload To Blob Storage 
       uses: bacongobbler/azure-blob-storage-upload@main
       with:
         source_dir: ./WiborData
