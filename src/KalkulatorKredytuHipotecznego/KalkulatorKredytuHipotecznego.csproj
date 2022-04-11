@@ -21,9 +21,10 @@
     <Folder Include="Components\Calculation\" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\SourceGenerator\SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Provider.Holidays\Provider.Holidays.csproj" />
+    <ProjectReference Include="..\Provider.Indexes\Provider.Indexes.csproj" />
+  </ItemGroup>
 
 	<!--<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>

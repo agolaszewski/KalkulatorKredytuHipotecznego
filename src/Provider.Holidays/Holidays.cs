@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace KalkulatorKredytuHipotecznego.Domain;
+﻿namespace Provider.Holidays;
 
 public class Holidays
 {

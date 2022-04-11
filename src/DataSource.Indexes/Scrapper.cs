@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Wibor.Scrapper
+namespace DataSource.Indexes
 {
     public class Scrapper
     {
@@ -15,7 +15,7 @@ namespace Wibor.Scrapper
             _httpClient = httpClient;
         }
 
-        public async Task<IReadOnlyList<Wibor>> ExecuteAsync(DateTime from, DateTime to, string type)
+        public async Task<IReadOnlyList<Index>> ExecuteAsync(DateTime from, DateTime to, string type)
         {
             if (from > to)
             {
@@ -29,7 +29,7 @@ namespace Wibor.Scrapper
                 throw new HttpRequestException(response.StatusCode.ToString());
             }
 
-            var result = new List<Wibor>();
+            var result = new List<Index>();
 
             using (StringReader reader = new StringReader(await response.Content.ReadAsStringAsync()))
             {
@@ -40,7 +40,7 @@ namespace Wibor.Scrapper
                     if (line != null)
                     {
                         var columns = line.Split(';');
-                        result.Add(new Wibor(columns[0], columns[1]));
+                        result.Add(new Index(columns[0], columns[1]));
                     }
                 } while (line != null);
             }

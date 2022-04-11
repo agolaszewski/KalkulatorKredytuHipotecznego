@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Wibor.Scrapper
+namespace DataSource.Indexes
 {
-    public class Wibor
+    public class Index
     {
-        public Wibor(string date, string value)
+        public Index(string date, string value)
         {
             Date = DateTime.ParseExact(date, "yyyy-MM-dd", null);
             Value = decimal.Parse(value, new NumberFormatInfo() { NumberDecimalSeparator = "." });
         }
 
-        public Wibor(DateTime date, decimal value)
+        public Index(DateTime date, decimal value)
         {
             Date = date;
             Value = value;

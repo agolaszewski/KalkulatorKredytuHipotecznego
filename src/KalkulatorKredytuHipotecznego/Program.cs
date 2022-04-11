@@ -4,6 +4,8 @@ using Blazorise.Icons.FontAwesome;
 using Fluxor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Provider.Holidays;
+using Provider.Indexes;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,6 +33,8 @@ namespace KalkulatorKredytuHipotecznego
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
 
+            await builder.Services.AddIndexProviders(new Holidays());
+
             var currentAssembly = typeof(Program).Assembly;
             builder.Services.AddFluxor(options =>
             {
@@ -40,8 +44,6 @@ namespace KalkulatorKredytuHipotecznego
                     reduxDevToolsMiddlewareOptions.UseNewtonsoftJson();
                 });
             });
-
-
 
             builder.RootComponents.Add<App>("#app");
 

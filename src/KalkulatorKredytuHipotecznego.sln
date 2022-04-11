@@ -3,21 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KalkulatorKredytuHipotecznego", "KalkulatorKredytuHipotecznego.csproj", "{71F596D0-0E41-4B0F-A387-60A12D72FC37}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{FB8652C0-8CD8-46AB-A6FF-CDF35D8EFD0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator", "..\SourceGenerator\SourceGenerator.csproj", "{E6F1DEF8-68D4-4D35-BBA3-C0DECD8CE525}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources", "{09304F35-7EC3-4058-8FE9-507CD1E66BB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator.Debugger", "..\SourceGenerator.Debugger\SourceGenerator.Debugger.csproj", "{83CA2286-BF0F-4B94-82B1-78A2CA177748}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Automations", "Automations", "{0A24E8B6-226A-478B-9998-478B10EDE6FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Scrapper", "..\WiborDataScrapper\Wibor.Scrapper.csproj", "{6B64EA8A-5DE2-4588-B110-268B6743603E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceGenerators", "SourceGenerators", "{F421B073-88EC-4815-ADD5-A738BDDE5BBF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wibor", "Wibor", "{CE171CEF-4D35-4E1A-9D11-69104B4FB80D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator", "SourceGenerator\SourceGenerator.csproj", "{D17CE63A-E7A4-430F-B91E-87747FFB7DFF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Data.Scrapper.Tests", "..\Wibor.Data.Scrapper.Tests\Wibor.Data.Scrapper.Tests.csproj", "{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator.Debugger", "SourceGenerator.Debugger\SourceGenerator.Debugger.csproj", "{82C5CF1D-27B0-4A91-866A-E44E0CB39985}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Scrapper.Runner", "..\Wibor.Scrapper.Runner\Wibor.Scrapper.Runner.csproj", "{ED751859-FD55-4F82-AE3A-77998B12DC59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KalkulatorKredytuHipotecznego", "KalkulatorKredytuHipotecznego\KalkulatorKredytuHipotecznego.csproj", "{FD08E425-01FC-4CC4-8BEE-F75A23E5DBFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers.Wibor", "..\Providers.Wibor\Providers.Wibor.csproj", "{6971EF3D-02E4-4965-94F1-D227C9AA56D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Holidays", "Provider.Holidays\Provider.Holidays.csproj", "{EEF2E189-5D58-4F6C-B29A-AFB8824A6099}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Indexes", "Provider.Indexes\Provider.Indexes.csproj", "{74482165-D7B9-48E0-BCA8-43FAE736B7BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wibor.Scrapper.Runner", "Wibor.Scrapper.Runner\Wibor.Scrapper.Runner.csproj", "{662F0515-91AD-485A-854D-EC4994C2C6CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSource.Indexes", "DataSource.Indexes\DataSource.Indexes.csproj", "{C8B759AB-99FD-4CA2-889C-15113B88E02E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,43 +31,45 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71F596D0-0E41-4B0F-A387-60A12D72FC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71F596D0-0E41-4B0F-A387-60A12D72FC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71F596D0-0E41-4B0F-A387-60A12D72FC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71F596D0-0E41-4B0F-A387-60A12D72FC37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6F1DEF8-68D4-4D35-BBA3-C0DECD8CE525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6F1DEF8-68D4-4D35-BBA3-C0DECD8CE525}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6F1DEF8-68D4-4D35-BBA3-C0DECD8CE525}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6F1DEF8-68D4-4D35-BBA3-C0DECD8CE525}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83CA2286-BF0F-4B94-82B1-78A2CA177748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83CA2286-BF0F-4B94-82B1-78A2CA177748}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83CA2286-BF0F-4B94-82B1-78A2CA177748}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83CA2286-BF0F-4B94-82B1-78A2CA177748}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B64EA8A-5DE2-4588-B110-268B6743603E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B64EA8A-5DE2-4588-B110-268B6743603E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B64EA8A-5DE2-4588-B110-268B6743603E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B64EA8A-5DE2-4588-B110-268B6743603E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED751859-FD55-4F82-AE3A-77998B12DC59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6971EF3D-02E4-4965-94F1-D227C9AA56D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17CE63A-E7A4-430F-B91E-87747FFB7DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17CE63A-E7A4-430F-B91E-87747FFB7DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17CE63A-E7A4-430F-B91E-87747FFB7DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17CE63A-E7A4-430F-B91E-87747FFB7DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82C5CF1D-27B0-4A91-866A-E44E0CB39985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C5CF1D-27B0-4A91-866A-E44E0CB39985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C5CF1D-27B0-4A91-866A-E44E0CB39985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C5CF1D-27B0-4A91-866A-E44E0CB39985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD08E425-01FC-4CC4-8BEE-F75A23E5DBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD08E425-01FC-4CC4-8BEE-F75A23E5DBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD08E425-01FC-4CC4-8BEE-F75A23E5DBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD08E425-01FC-4CC4-8BEE-F75A23E5DBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF2E189-5D58-4F6C-B29A-AFB8824A6099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF2E189-5D58-4F6C-B29A-AFB8824A6099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF2E189-5D58-4F6C-B29A-AFB8824A6099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF2E189-5D58-4F6C-B29A-AFB8824A6099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74482165-D7B9-48E0-BCA8-43FAE736B7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74482165-D7B9-48E0-BCA8-43FAE736B7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74482165-D7B9-48E0-BCA8-43FAE736B7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74482165-D7B9-48E0-BCA8-43FAE736B7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662F0515-91AD-485A-854D-EC4994C2C6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662F0515-91AD-485A-854D-EC4994C2C6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662F0515-91AD-485A-854D-EC4994C2C6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662F0515-91AD-485A-854D-EC4994C2C6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B759AB-99FD-4CA2-889C-15113B88E02E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B759AB-99FD-4CA2-889C-15113B88E02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B759AB-99FD-4CA2-889C-15113B88E02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B759AB-99FD-4CA2-889C-15113B88E02E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6B64EA8A-5DE2-4588-B110-268B6743603E} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
-		{6D52B554-DDE7-4C40-B8D8-C4A12B59DB4C} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
-		{ED751859-FD55-4F82-AE3A-77998B12DC59} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
-		{6971EF3D-02E4-4965-94F1-D227C9AA56D5} = {CE171CEF-4D35-4E1A-9D11-69104B4FB80D}
+		{D17CE63A-E7A4-430F-B91E-87747FFB7DFF} = {F421B073-88EC-4815-ADD5-A738BDDE5BBF}
+		{82C5CF1D-27B0-4A91-866A-E44E0CB39985} = {F421B073-88EC-4815-ADD5-A738BDDE5BBF}
+		{EEF2E189-5D58-4F6C-B29A-AFB8824A6099} = {FB8652C0-8CD8-46AB-A6FF-CDF35D8EFD0F}
+		{74482165-D7B9-48E0-BCA8-43FAE736B7BA} = {FB8652C0-8CD8-46AB-A6FF-CDF35D8EFD0F}
+		{662F0515-91AD-485A-854D-EC4994C2C6CD} = {0A24E8B6-226A-478B-9998-478B10EDE6FA}
+		{C8B759AB-99FD-4CA2-889C-15113B88E02E} = {09304F35-7EC3-4058-8FE9-507CD1E66BB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C3D233C-EEC2-41FD-8B61-7B101224194F}

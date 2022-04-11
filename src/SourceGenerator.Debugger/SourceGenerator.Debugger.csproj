@@ -13,8 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\KalkulatorKredytuHipotecznego\KalkulatorKredytuHipotecznego.csproj" />
 	  <ProjectReference Include="..\SourceGenerator\SourceGenerator.csproj" />
-	  <ProjectReference Include="..\src\KalkulatorKredytuHipotecznego.csproj" />
 	</ItemGroup>
 
 </Project>

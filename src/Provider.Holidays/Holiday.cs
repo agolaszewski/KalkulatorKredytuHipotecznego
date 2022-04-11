@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KalkulatorKredytuHipotecznego.Domain;
+﻿namespace Provider.Holidays;
 
 public record Holiday : IEquatable<DateTime>
 {
