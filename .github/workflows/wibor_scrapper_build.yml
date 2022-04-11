@@ -3,8 +3,9 @@ name: Wibor Scrapper Build
 on:
   push:
     paths:
-      - 'WiborDataScrapper/**'
-      - 'Wibor.Scrapper.Runner/**'
+      - 'src/Wibor.Scrapper.Runner/**'
+      - 'src/DataSource.Indexes/**'
+      - '.github/workflows/wibor_scrapper_build.yml'
   schedule:
       - cron : "0 0 1 * *"
   
@@ -15,6 +16,9 @@ concurrency:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
