@@ -1,10 +1,10 @@
-﻿using Fluxor;
+﻿using Calculator.Schedule;
+using Domain;
+using Fluxor;
 using Fluxor.Blazor.Web.Components;
-using KalkulatorKredytuHipotecznego.Domain;
 using KalkulatorKredytuHipotecznego.Store.States;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KalkulatorKredytuHipotecznego.Pages.Main
 {
@@ -28,11 +28,9 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             selectedTab = name;
         }
 
-        private List<InstallmentDetails> Installments = new();
-
-        private void OnCalculateButtonClicked()
+        public async Task OnCalculateButtonClicked()
         {
-            IInstallmentCalculationStrategy strategy = new Domain.InstallmentType(State.Value.InstallmentType).Strategy;
+            var strategy = new Domain.InstallmentType((Domain.InstallmentType.InstallmentTypeValues)State.Value.InstallmentType).Strategy;
             CreditAmount creditAmount = State.Value.CreditAmount;
             CreditPeriods creditPeriods = State.Value.CreditPeriodType == PeriodType.Months ? new Months(State.Value.CreditPeriods) : new Years(State.Value.CreditPeriods);
 
@@ -42,46 +40,7 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod = WarsawInterbankOfferedRatePeriod.Create(State.Value.WarsawInterbankOfferedRatePeriod);
 
             var schedule = new ScheduleCalculator();
-            Installments = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest, wiborInterbankOfferedRatePeriodRatePeriod);
-        }
-    }
-
-    public class ScheduleCalculator
-    {
-        public List<InstallmentDetails> Calculate(IInstallmentCalculationStrategy strategy, CreditAmount creditAmount,
-            CreditOpening creditOpening, CreditPeriods creditPeriods, InstallmentDate installmentDate,
-            Interest interest, WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod)
-        {
-            var installments = new List<InstallmentDetails>();
-            Installment baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
-
-            DateTime from = creditOpening.Value;
-            DateTime to = installmentDate.Value;
-
-            int index = 0;
-            while (creditPeriods.Value > 1)
-            {
-                if (index % wiborInterbankOfferedRatePeriodRatePeriod.Value == 0)
-                {
-                    baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
-                }
-
-                var installmentPeriod = Days.Difference(from, to);
-                var installment = new InstallmentDetails(++index, to, baseInstallment, interest, creditAmount, installmentPeriod);
-
-                installments.Add(installment);
-
-                creditPeriods = creditPeriods.Value - 1;
-                creditAmount = creditAmount.Value - installment.Principal;
-
-                from = to;
-                to = from.AddMonths(1);
-            }
-
-            var lastInstallmentDetails = InstallmentDetails.LastInstallment(++index, to, interest, creditAmount, Days.Difference(from, to));
-            installments.Add(lastInstallmentDetails);
-
-            return installments;
+            var scheduleDetails = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest, wiborInterbankOfferedRatePeriodRatePeriod);
         }
     }
 }

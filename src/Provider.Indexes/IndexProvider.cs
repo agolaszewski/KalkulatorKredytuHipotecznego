@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using CsvHelper;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
+using System.Globalization;
 
 namespace Provider.Indexes;
 
@@ -21,16 +21,31 @@ public class IndexProvider : IIndexProvider
         _holidays = holidays;
     }
 
-    public static async Task<IndexProvider> Build(Index name, Holidays.Holidays holidays)
+    public static async Task<IndexProvider> Build(HttpClient httpClient, Index index, Holidays.Holidays holidays)
     {
-        var file = await new HttpClient().GetAsync($"https://kalkulatorkredytublob.blob.core.windows.net/wibor/{name}.csv");
+        try
+        {
+            var file = await httpClient.GetAsync($"https://kalkulatorkredytublob.blob.core.windows.net/wibor/{index.Name}.csv");
 
-        using var reader = new StreamReader(await file.Content.ReadAsStreamAsync());
-        using var csv = new CsvReader(reader, Config);
+            using var reader = new StreamReader(await file.Content.ReadAsStreamAsync());
+            using var csv = new CsvReader(reader, Config);
 
-        var records = csv.GetRecords<(DateTime Date, decimal Value)>().ToList();
-        var data = records.ToDictionary(x => x.Date, x => x.Value);
-        return new IndexProvider(data, holidays);
+            var records = csv.GetRecords<IndexData>().ToList();
+            var data = records.ToDictionary(x => x.Date, x => x.Value);
+            return new IndexProvider(data, holidays);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private class IndexData
+    {
+        public DateTime Date { get; set; }
+
+        public decimal Value { get; set; }
     }
 
     public decimal GetValue(DateTime date)

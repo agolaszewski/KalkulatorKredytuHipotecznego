@@ -41,8 +41,8 @@ static Compilation CreateCompilation(string source)
         new[]
         {
             MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(KalkulatorKredytuHipotecznego.Domain.Margin).GetTypeInfo().Assembly
-                .Location)
+            //MetadataReference.CreateFromFile(typeof(KalkulatorKredytuHipotecznego.Domain.Margin).GetTypeInfo().Assembly
+            //    .Location)
         },
         new CSharpCompilationOptions(OutputKind.ConsoleApplication));
 }

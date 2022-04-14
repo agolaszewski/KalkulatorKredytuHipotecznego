@@ -1,4 +1,4 @@
-﻿namespace KalkulatorKredytuHipotecznego.Domain;
+﻿namespace Domain;
 
 public partial record CreditPeriods : ValueObject<int>
 {

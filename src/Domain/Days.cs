@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KalkulatorKredytuHipotecznego.Domain;
+﻿namespace Domain;
 
 public partial record Days : ValueObject<int>
 {

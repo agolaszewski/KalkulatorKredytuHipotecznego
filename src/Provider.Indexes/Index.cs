@@ -11,6 +11,6 @@
             _name = name;
         }
 
-        public static explicit operator string(Index @this) => @this._name;
+        public string Name => _name;
     }
 }

@@ -6,16 +6,16 @@ public class IndexProviderFactory
 
     public IndexProviderFactory(IDictionary<Index, IIndexProvider> map)
     {
-        _map = map.ToDictionary(x => (string)x.Key, x => x.Value);
+        _map = map.ToDictionary(x => x.Key.Name, x => x.Value);
     }
 
     public IIndexProvider IndexProvider(Index index)
     {
-        if (!_map.ContainsKey((string)index))
+        if (!_map.ContainsKey(index.Name))
         {
-            throw new ArgumentOutOfRangeException((string)index);
+            throw new ArgumentOutOfRangeException(index.Name);
         }
 
-        return _map[(string)index];
+        return _map[index.Name];
     }
 }

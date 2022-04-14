@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 
-namespace KalkulatorKredytuHipotecznego.Domain;
+namespace Domain;
 
 public class FlatInstallmentsCalculationStrategy : IInstallmentCalculationStrategy
 {

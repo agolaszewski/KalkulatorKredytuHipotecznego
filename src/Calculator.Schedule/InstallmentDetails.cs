@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Domain;
 
-namespace KalkulatorKredytuHipotecznego.Domain;
+namespace Calculator.Schedule;
 
 public record InstallmentDetails
 {
