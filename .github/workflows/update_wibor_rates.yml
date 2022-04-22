@@ -53,7 +53,9 @@ jobs:
                   status:"success",
                   per_page:1
                 });
-                core.exportVariable('FROM', run.data.workflow_runs[0].updated_at);
+                const date = new Date(run.data.workflow_runs[0].updated_at);
+                const dateFormatted = `${xd.getFullYear()}-${xd.getMonth() + 1}-${xd.getDay() + 1}`;
+                core.exportVariable('FROM', dateFormatted);
     
     - name: Override Parameters
       if: github.event.schedule == null
