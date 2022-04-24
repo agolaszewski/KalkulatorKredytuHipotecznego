@@ -24,7 +24,7 @@ namespace KalkulatorKredytuHipotecznego.Store.States
             _installmentType = InstallmentType.Flat;
             _warsawInterbankOfferedRatePeriod = 3;
 
-            TotalMargin = _margin + _warsawInterbankOfferedRatePeriod;
+            TotalMargin = _margin + _warsawInterbankOfferedRate;
         }
 
         private decimal _creditAmount;
