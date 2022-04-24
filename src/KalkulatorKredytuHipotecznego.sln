@@ -27,9 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSource.Indexes", "DataS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calculators", "Calculators", "{F84670AA-D4E8-424B-B399-E8A89EF62576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Schedule", "Calculator.Schedule\Calculator.Schedule.csproj", "{CBCAF986-A006-43E7-85A9-21A2E4C265BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Schedule", "Calculator.Schedule\Calculator.Schedule.csproj", "{CBCAF986-A006-43E7-85A9-21A2E4C265BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{703AF8A0-2054-4F4D-B6BE-60F77486E807}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{703AF8A0-2054-4F4D-B6BE-60F77486E807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{13E181DF-1ED9-4CC4-B186-2366A8F8C01A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{703AF8A0-2054-4F4D-B6BE-60F77486E807}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{703AF8A0-2054-4F4D-B6BE-60F77486E807}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{703AF8A0-2054-4F4D-B6BE-60F77486E807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E181DF-1ED9-4CC4-B186-2366A8F8C01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E181DF-1ED9-4CC4-B186-2366A8F8C01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E181DF-1ED9-4CC4-B186-2366A8F8C01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E181DF-1ED9-4CC4-B186-2366A8F8C01A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

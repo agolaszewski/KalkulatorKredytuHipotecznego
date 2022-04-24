@@ -1,6 +1,7 @@
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Core;
 using Fluxor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Provider.Indexes;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Calculator.Schedule;
 
 namespace KalkulatorKredytuHipotecznego
 {
@@ -33,7 +35,9 @@ namespace KalkulatorKredytuHipotecznego
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
 
-            await builder.Services.AddIndexProviders(new Holidays());
+            builder.Services.AddCommonServices();
+            await builder.Services.AddIndexProviders(new DateTimeProvider(), new Holidays());
+            builder.Services.AddSingleton<ScheduleCalculator>();
 
             var currentAssembly = typeof(Program).Assembly;
             builder.Services.AddFluxor(options =>

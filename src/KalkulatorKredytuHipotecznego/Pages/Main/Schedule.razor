@@ -28,6 +28,6 @@
 
 @code
 {
-    public List<InstallmentDetails> Installments { get; set; } = new();
-
+    [Parameter]
+    public IReadOnlyList<InstallmentDetails> Installments { get; set; }
 }

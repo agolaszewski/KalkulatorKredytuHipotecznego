@@ -69,5 +69,17 @@ namespace KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Reduce
 
             return state with { FirstInstallmentDate = state.FirstInstallmentDate };
         }
+
+        [ReducerMethod]
+        public static CalculationState IndexValueFetchedReducer(CalculationState state, IndexValueFetched action)
+        {
+            return state with { WarsawInterbankOfferedRate = action.Value };
+        }
+
+        [ReducerMethod]
+        public static CalculationState ScheduleCalculatedReducer(CalculationState state, ScheduleCalculated action)
+        {
+            return state with { ScheduleInstallmentDetails = action.ScheduleInstallmentsDetails };
+        }
     }
 }

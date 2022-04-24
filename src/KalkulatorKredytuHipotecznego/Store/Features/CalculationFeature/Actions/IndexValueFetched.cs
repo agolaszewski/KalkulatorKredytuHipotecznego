@@ -1,4 +1,4 @@
 ﻿namespace KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Actions
 {
-    public record FirstInstallmentDateValueChanged();
+    public record IndexValueFetched(decimal Value);
 }

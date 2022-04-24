@@ -2,6 +2,7 @@
 using Domain;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
+using KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Actions;
 using KalkulatorKredytuHipotecznego.Store.States;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
         [Inject]
         private IDispatcher Dispatcher { get; set; }
 
+        [Inject]
+        private ScheduleCalculator ScheduleCalculator { get; set; }
+
         protected override void OnParametersSet()
         {
             BaseState<CalculationState>.Dispatcher = Dispatcher;
@@ -28,19 +32,20 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             selectedTab = name;
         }
 
-        public async Task OnCalculateButtonClicked()
+        public void OnCalculateButtonClicked()
         {
             var strategy = new Domain.InstallmentType((Domain.InstallmentType.InstallmentTypeValues)State.Value.InstallmentType).Strategy;
             CreditAmount creditAmount = State.Value.CreditAmount;
             CreditPeriods creditPeriods = State.Value.CreditPeriodType == PeriodType.Months ? new Months(State.Value.CreditPeriods) : new Years(State.Value.CreditPeriods);
 
-            Interest interest = new Interest(State.Value.Margin / 100, State.Value.WarsawInterbankOfferedRate / 100);
+            Margin margin = new Margin(State.Value.Margin / 100);
             InstallmentDate installmentDate = State.Value.FirstInstallmentDate;
 
+            WarsawInterbankOfferedRate warsawInterbankOfferedRate = State.Value.WarsawInterbankOfferedRate;
             WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod = WarsawInterbankOfferedRatePeriod.Create(State.Value.WarsawInterbankOfferedRatePeriod);
 
-            var schedule = new ScheduleCalculator();
-            var scheduleDetails = schedule.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, interest, wiborInterbankOfferedRatePeriodRatePeriod);
+            var scheduleDetails = ScheduleCalculator.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, margin, warsawInterbankOfferedRate, wiborInterbankOfferedRatePeriodRatePeriod);
+            Dispatcher.Dispatch(new ScheduleCalculated(scheduleDetails));
         }
     }
 }

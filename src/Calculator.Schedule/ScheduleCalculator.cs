@@ -1,24 +1,48 @@
 ﻿using Domain;
+using Provider.Indexes;
 
 namespace Calculator.Schedule
 {
     public class ScheduleCalculator
     {
-        public List<InstallmentDetails> Calculate(IInstallmentCalculationStrategy strategy, CreditAmount creditAmount,
-            CreditOpening creditOpening, CreditPeriods creditPeriods, InstallmentDate installmentDate,
-            Interest interest, WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod)
+        private readonly IndexProviderFactory _indexProviderFactory;
+
+        public ScheduleCalculator(IndexProviderFactory indexProviderFactory)
         {
-            var installments = new List<InstallmentDetails>();
-            Installment baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
+            _indexProviderFactory = indexProviderFactory;
+        }
+
+        public IReadOnlyList<InstallmentDetails> Calculate(
+            IInstallmentCalculationStrategy strategy,
+            CreditAmount creditAmount,
+            CreditOpening creditOpening,
+            CreditPeriods creditPeriods,
+            InstallmentDate installmentDate,
+            Margin margin,
+            WarsawInterbankOfferedRate wibInterbankOfferedRate,
+            WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod)
+        {
+            var interestIndex = wiborInterbankOfferedRatePeriodRatePeriod == WarsawInterbankOfferedRatePeriod.Wibor3M
+                ? Provider.Indexes.Index.Wibor3M
+                : Provider.Indexes.Index.Wibor6M;
+
+            IIndexProvider indexProvider = _indexProviderFactory.IndexProvider(interestIndex);
 
             DateTime from = creditOpening.Value;
             DateTime to = installmentDate.Value;
+
+            var interest = new Interest(margin, wibInterbankOfferedRate);
+
+            var installments = new List<InstallmentDetails>();
+            Installment baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
 
             int index = 0;
             while (creditPeriods.Value > 1)
             {
                 if (index % wiborInterbankOfferedRatePeriodRatePeriod.Value == 0)
                 {
+                    decimal interestIndexValue = indexProvider.GetValue(from);
+                    interest = new Interest(margin, interestIndexValue / 100);
                     baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
                 }
 

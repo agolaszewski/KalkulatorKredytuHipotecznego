@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Calculator.Schedule\Calculator.Schedule.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Provider.Holidays\Provider.Holidays.csproj" />
     <ProjectReference Include="..\Provider.Indexes\Provider.Indexes.csproj" />

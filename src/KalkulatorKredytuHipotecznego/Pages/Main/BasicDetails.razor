@@ -25,7 +25,7 @@
 </Row>
 <Row>
     <Column>
-        <FormField Text="Otwarcie kredytu">
+        <FormField Text="Dzień uruchomienia kredytu">
             <DateEdit TValue="DateTime" @bind-Date="State.Value.CreditOpening" />
         </FormField>
     </Column>
@@ -64,6 +64,9 @@
                 </Addon>
                 <Addon AddonType="AddonType.End">
                     <AddonLabel>%</AddonLabel>
+                </Addon>
+                <Addon AddonType="AddonType.End">
+                    <Button  Color="Color.Secondary" Clicked="@GetIndexValue">Pobierz</Button>
                 </Addon>
             </Addons>
         </FormField>
