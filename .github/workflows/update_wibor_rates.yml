@@ -46,6 +46,13 @@ jobs:
       with:
         # The script to run
         script: |
+        
+                function prependZero(number)
+                {
+                  if(number >= 10) { return number; }
+                  return `0${number}`;
+                }
+        
                 const run = await github.rest.actions.listWorkflowRuns({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
@@ -54,7 +61,7 @@ jobs:
                   per_page:1
                 });
                 const date = new Date(run.data.workflow_runs[0].updated_at);
-                const dateFormatted = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay() + 1}`;
+                const dateFormatted = `${date.getFullYear()}-${prependZero(date.getMonth() + 1)}-${prependZero(date.getDay() + 1)}`;
                 core.exportVariable('FROM', dateFormatted);
     
     - name: Override Parameters
