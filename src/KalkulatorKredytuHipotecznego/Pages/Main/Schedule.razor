@@ -7,6 +7,7 @@
             <TableHeaderCell>Kwota</TableHeaderCell>
             <TableHeaderCell>Kapitał</TableHeaderCell>
             <TableHeaderCell>Odsetki</TableHeaderCell>
+            <TableHeaderCell>Oprocentowanie</TableHeaderCell>
             <TableHeaderCell>Saldo</TableHeaderCell>
             <TableHeaderCell>Koszty okołokredytowe</TableHeaderCell>
         </TableRow>
@@ -20,6 +21,7 @@
                 <TableRowCell>@Math.Round(@installment.Installment,2)</TableRowCell>
                 <TableRowCell>@Math.Round(@installment.Principal,2)</TableRowCell>
                 <TableRowCell>@Math.Round(@installment.Interest,2)</TableRowCell>
+                <TableRowCell>@Math.Round(@installment.RateOfInterest,2)</TableRowCell>
                 <TableRowCell>@Math.Round(@installment.CreditAmount,2)</TableRowCell>
             </TableRow>
         }

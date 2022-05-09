@@ -38,10 +38,10 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
             CreditAmount creditAmount = State.Value.CreditAmount;
             CreditPeriods creditPeriods = State.Value.CreditPeriodType == PeriodType.Months ? new Months(State.Value.CreditPeriods) : new Years(State.Value.CreditPeriods);
 
-            Margin margin = new Margin(State.Value.Margin / 100);
+            Margin margin = new Margin(State.Value.Margin / 100M);
             InstallmentDate installmentDate = State.Value.FirstInstallmentDate;
 
-            WarsawInterbankOfferedRate warsawInterbankOfferedRate = State.Value.WarsawInterbankOfferedRate;
+            WarsawInterbankOfferedRate warsawInterbankOfferedRate = State.Value.WarsawInterbankOfferedRate / 100M;
             WarsawInterbankOfferedRatePeriod wiborInterbankOfferedRatePeriodRatePeriod = WarsawInterbankOfferedRatePeriod.Create(State.Value.WarsawInterbankOfferedRatePeriod);
 
             var scheduleDetails = ScheduleCalculator.Calculate(strategy, creditAmount, State.Value.CreditOpening, creditPeriods, installmentDate, margin, warsawInterbankOfferedRate, wiborInterbankOfferedRatePeriodRatePeriod);

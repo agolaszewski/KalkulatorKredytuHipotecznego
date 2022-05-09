@@ -32,7 +32,7 @@ namespace KalkulatorKredytuHipotecznego.Pages.Main
                 : Provider.Indexes.Index.Wibor6M;
 
             IIndexProvider indexProvider = IndexProviderFactory.IndexProvider(interestIndex);
-            var indexValue = indexProvider.GetValue(State.Value.CreditOpening);
+            var indexValue =  indexProvider.GetValue(new DateTime(State.Value.SigningDay.Year, State.Value.SigningDay.Month, 1).AddDays(-1));
             Dispatcher.Dispatch(new IndexValueFetched(indexValue));
         }
 

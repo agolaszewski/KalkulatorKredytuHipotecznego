@@ -39,15 +39,10 @@ namespace Calculator.Schedule
             int index = 0;
             while (creditPeriods.Value > 1)
             {
-                if (index % wiborInterbankOfferedRatePeriodRatePeriod.Value == 0)
-                {
-                    decimal interestIndexValue = indexProvider.GetValue(from);
-                    interest = new Interest(margin, interestIndexValue / 100);
-                    baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
-                }
+                index++;
 
                 var installmentPeriod = Days.Difference(from, to);
-                var installment = new InstallmentDetails(++index, to, baseInstallment, interest, creditAmount, installmentPeriod);
+                var installment = new InstallmentDetails(index, to, baseInstallment, interest, creditAmount, installmentPeriod);
 
                 installments.Add(installment);
 
@@ -56,6 +51,13 @@ namespace Calculator.Schedule
 
                 from = to;
                 to = from.AddMonths(1);
+
+                if (index % wiborInterbankOfferedRatePeriodRatePeriod.Value == 0)
+                {
+                    decimal interestIndexValue = indexProvider.GetValue(from);
+                    interest = new Interest(margin, interestIndexValue / 100);
+                    baseInstallment = strategy.Execute(creditAmount, creditPeriods, interest);
+                }
             }
 
             var lastInstallmentDetails = InstallmentDetails.LastInstallment(++index, to, interest, creditAmount, Days.Difference(from, to));

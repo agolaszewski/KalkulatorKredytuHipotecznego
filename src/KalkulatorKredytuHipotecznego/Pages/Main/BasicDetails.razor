@@ -4,14 +4,16 @@
 <Row>
     <Column>
         <FormField Text="Kwota kredytu">
-            <NumericEdit Min="0" Max="100000000" TValue="decimal" @bind-Value="State.Value.CreditAmount" />
+            <NumericEditDecimal @bind-Value="State.Value.CreditAmount" Min="10000M" Max="2000000M" Step="10000M">
+            </NumericEditDecimal>
         </FormField>
     </Column>
     <Column>
         <FormField Text="Okres kredytowania">
             <Addons>
                 <Addon AddonType="AddonType.Body">
-                    <NumericEdit Min="0" Max="@MaxCreditPeriods()" TValue="int" @bind-Value="State.Value.CreditPeriods" />
+                    <NumericEdit Min="0" Max="@MaxCreditPeriods()" TValue="int"
+                        @bind-Value="State.Value.CreditPeriods" />
                 </Addon>
                 <Addon AddonType="AddonType.End">
                     <Select TValue="PeriodType" @bind-SelectedValue="State.Value.CreditPeriodType">
@@ -25,6 +27,11 @@
 </Row>
 <Row>
     <Column>
+        <FormField Text="Dzień podpisania umowy">
+            <DateEdit TValue="DateTime" @bind-Date="State.Value.SigningDay" />
+        </FormField>
+    </Column>
+    <Column>
         <FormField Text="Dzień uruchomienia kredytu">
             <DateEdit TValue="DateTime" @bind-Date="State.Value.CreditOpening" />
         </FormField>
@@ -36,7 +43,8 @@
     </Column>
     <Column>
         <FormField Text="Rodzaj rat">
-            <RadioGroup TValue="InstallmentType" Buttons="true" @bind-CheckedValue="State.Value.InstallmentType" Display="Display.Flex">
+            <RadioGroup TValue="InstallmentType" Buttons="true" @bind-CheckedValue="State.Value.InstallmentType"
+                Display="Display.Flex">
                 <Radio Value="@InstallmentType.Flat">Rowne</Radio>
                 <Radio Value="@InstallmentType.Decreasing">Malejace</Radio>
             </RadioGroup>
@@ -46,18 +54,15 @@
 <Row>
     <Column>
         <FormField Text="Marża">
-            <Addons>
-                <Addon AddonType="AddonType.Body">
-                    <NumericEdit Min="0" Max="100" TValue="decimal" Step="0.1M" @bind-Value="State.Value.Margin" />
-                </Addon>
-                <Addon AddonType="AddonType.End">
+            <NumericEditDecimal @bind-Value="State.Value.Margin" Min="0M" Max="100M" Step="0.1M">
+                <EndContent>
                     <AddonLabel>%</AddonLabel>
-                </Addon>
-            </Addons>
+                </EndContent>
+            </NumericEditDecimal>
         </FormField>
     </Column>
     <Column>
-        <FormField Text="Wibor z dnia uruchomienia">
+        <FormField Text="Początkowy Wibor">
             <Addons>
                 <Addon AddonType="AddonType.Body">
                     <NumericEdit TValue="decimal" Step="0.1M" @bind-Value="State.Value.WarsawInterbankOfferedRate" />
@@ -66,7 +71,7 @@
                     <AddonLabel>%</AddonLabel>
                 </Addon>
                 <Addon AddonType="AddonType.End">
-                    <Button  Color="Color.Secondary" Clicked="@GetIndexValue">Pobierz</Button>
+                    <Button Color="Color.Secondary" Clicked="@GetIndexValue">Pobierz</Button>
                 </Addon>
             </Addons>
         </FormField>
@@ -75,7 +80,7 @@
         <FormField Text="Oprocentowanie">
             <Addons>
                 <Addon AddonType="AddonType.Body">
-                    <NumericEdit TValue="decimal" @bind-Value="State.Value.TotalMargin" ReadOnly="true"  />
+                    <NumericEdit TValue="decimal" @bind-Value="State.Value.TotalMargin" ReadOnly="true" />
                 </Addon>
                 <Addon AddonType="AddonType.End">
                     <AddonLabel>%</AddonLabel>
@@ -85,7 +90,8 @@
     </Column>
     <Column>
         <FormField Text="Wibor">
-            <RadioGroup TValue="int" Buttons="true" @bind-CheckedValue="State.Value.WarsawInterbankOfferedRatePeriod" Display="Display.Flex">
+            <RadioGroup TValue="int" Buttons="true" @bind-CheckedValue="State.Value.WarsawInterbankOfferedRatePeriod"
+                Display="Display.Flex">
                 <Radio Value="3">3M</Radio>
                 <Radio Value="6">6M</Radio>
             </RadioGroup>

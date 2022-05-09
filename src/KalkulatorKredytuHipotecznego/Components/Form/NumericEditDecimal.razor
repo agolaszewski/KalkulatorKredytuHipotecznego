@@ -1,0 +1,14 @@
+﻿<Addons>
+    <Addon AddonType="AddonType.Start">
+        <Button Color="Color.Secondary" Clicked="OnDecresedClicked">-</Button>
+         @StartContent
+    </Addon>
+    <Addon AddonType="AddonType.Body">
+        <TextEdit Text="@Value.ToString()" TextChanged="@OnValueChanged"/>
+    </Addon>
+    <Addon AddonType="AddonType.End">
+         <Button Color="Color.Secondary" Clicked="OnIncreaseClicked">+</Button>
+          @EndContent
+    </Addon>
+  </Addons>
+

@@ -9,6 +9,7 @@ public record InstallmentDetails
         Index = index;
         InstallmentDate = installmentDate.Value;
         Installment = installment.Value;
+        RateOfInterest = interest.Value * 100M;
         Interest = creditAmount.Value * interest.Value * (installmentPeriod.Value / 365M);
         Principal = Installment - Interest;
         CreditAmount = creditAmount.Value - Principal;
@@ -19,24 +20,16 @@ public record InstallmentDetails
         var interestTemp = creditAmount.Value * interest.Value * (installmentPeriod.Value / 365M);
         var principal = creditAmount.Value;
 
-        return new InstallmentDetails()
+        return new InstallmentDetails
         {
             Index = index,
             Interest = interestTemp,
+            RateOfInterest = interest.Value * 100M,
             Principal = principal,
             CreditAmount = 0,
             Installment = interestTemp + principal,
             InstallmentDate = installmentDate.Value
         };
-    }
-
-    public InstallmentDetails(int index, InstallmentDate installmentDate, Interest interest, CreditAmount creditAmount, Days installmentPeriod)
-    {
-        Index = index;
-        InstallmentDate = installmentDate.Value;
-        Interest = creditAmount.Value * interest.Value * (installmentPeriod.Value / 365M);
-        Principal = creditAmount.Value;
-        CreditAmount = 0;
     }
 
     private InstallmentDetails()
@@ -54,4 +47,6 @@ public record InstallmentDetails
     public DateTime InstallmentDate { get; set; }
 
     public decimal CreditAmount { get; set; }
+
+    public decimal RateOfInterest { get; set; }
 }

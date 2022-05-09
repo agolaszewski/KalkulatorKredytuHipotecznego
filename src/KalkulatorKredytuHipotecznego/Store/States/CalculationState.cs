@@ -13,14 +13,16 @@ namespace KalkulatorKredytuHipotecznego.Store.States
             var indexProvider = _indexProviderFactory.IndexProvider(Provider.Indexes.Index.Wibor3M);
             var today = DateTime.Today;
 
-            _creditAmount = 300000;
-            _creditPeriods = 240;
+            _creditAmount = 160000;
+            _creditPeriods = 120;
             _creditPeriodType = PeriodType.Months;
-            _margin = 2;
+            _margin = 2.1M;
 
-            _firstInstallmentDate = today;
+            _signingDay = new DateTime(today.Year, today.Month, 1);
             _creditOpening = new DateTime(today.Year, today.Month, 1);
-            _warsawInterbankOfferedRate = indexProvider.GetValue(_creditOpening);
+            _firstInstallmentDate = today;
+
+            _warsawInterbankOfferedRate = indexProvider.GetValue(new DateTime(_signingDay.Year, _signingDay.Month, 1).AddDays(-1));
             _installmentType = InstallmentType.Flat;
             _warsawInterbankOfferedRatePeriod = 3;
 
@@ -88,6 +90,13 @@ namespace KalkulatorKredytuHipotecznego.Store.States
         {
             get => _warsawInterbankOfferedRatePeriod;
             set => OnChange(ref _warsawInterbankOfferedRatePeriod, value);
+        }
+
+        private DateTime _signingDay;
+        public DateTime SigningDay
+        {
+            get => _signingDay;
+            set => OnChange(ref _signingDay, value, new SigningDayValueChanged());
         }
 
         public decimal TotalMargin { get; set; }

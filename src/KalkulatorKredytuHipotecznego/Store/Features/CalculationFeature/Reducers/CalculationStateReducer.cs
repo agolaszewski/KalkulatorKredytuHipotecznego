@@ -39,35 +39,78 @@ namespace KalkulatorKredytuHipotecznego.Store.Features.CalculationFeature.Reduce
         [ReducerMethod]
         public static CalculationState CreditOpeningValueChangedReducer(CalculationState state, CreditOpeningValueChanged _)
         {
+            var signingDay = state.SigningDay;
             var creditOpening = state.CreditOpening;
+            var firstInstallmentDate = state.FirstInstallmentDate;
 
-            if (state.FirstInstallmentDate < creditOpening)
+            if (creditOpening < signingDay)
             {
-                return state with
-                {
-                    FirstInstallmentDate = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day),
-                    CreditOpening = creditOpening,
-                };
+                signingDay = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day);
             }
 
-            return state with { CreditOpening = state.CreditOpening };
+            if (creditOpening > firstInstallmentDate)
+            {
+                firstInstallmentDate = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day).AddMonths(1);
+            }
+
+            return state with
+            {
+                SigningDay = signingDay,
+                FirstInstallmentDate = firstInstallmentDate,
+                CreditOpening = creditOpening,
+            };
+        }
+
+        [ReducerMethod]
+        public static CalculationState SigningDayValueChangedReducer(CalculationState state, SigningDayValueChanged _)
+        {
+            var signingDay = state.SigningDay;
+            var creditOpening = state.CreditOpening;
+            var firstInstallmentDate = state.FirstInstallmentDate;
+
+            creditOpening = new DateTime(signingDay.Year, creditOpening.Month, creditOpening.Day);
+            if (signingDay > creditOpening)
+            {
+                creditOpening = new DateTime(signingDay.Year, signingDay.Month, signingDay.Day);
+            }
+
+            firstInstallmentDate = new DateTime(signingDay.Year, firstInstallmentDate.Month, firstInstallmentDate.Day);
+            if (signingDay > firstInstallmentDate)
+            {
+                firstInstallmentDate = new DateTime(creditOpening.Year, creditOpening.Month, creditOpening.Day).AddMonths(1);
+            }
+
+            return state with
+            {
+                SigningDay = signingDay,
+                FirstInstallmentDate = firstInstallmentDate,
+                CreditOpening = creditOpening,
+            };
         }
 
         [ReducerMethod]
         public static CalculationState FirstInstallmentDateValueChangedReducer(CalculationState state, FirstInstallmentDateValueChanged _)
         {
+            var signingDay = state.SigningDay;
+            var creditOpening = state.CreditOpening;
             var firstInstallmentDate = state.FirstInstallmentDate;
 
-            if (state.CreditOpening > firstInstallmentDate)
+            if (firstInstallmentDate < signingDay)
             {
-                return state with
-                {
-                    CreditOpening = new DateTime(firstInstallmentDate.Year, firstInstallmentDate.Month, firstInstallmentDate.Day),
-                    FirstInstallmentDate = firstInstallmentDate,
-                };
+                signingDay = new DateTime(firstInstallmentDate.Year, firstInstallmentDate.Month, firstInstallmentDate.Day);
             }
 
-            return state with { FirstInstallmentDate = state.FirstInstallmentDate };
+            if (firstInstallmentDate < creditOpening)
+            {
+                creditOpening = new DateTime(firstInstallmentDate.Year, firstInstallmentDate.Month, firstInstallmentDate.Day).AddMonths(-1);
+            }
+
+            return state with
+            {
+                SigningDay = signingDay,
+                FirstInstallmentDate = firstInstallmentDate,
+                CreditOpening = creditOpening,
+            };
         }
 
         [ReducerMethod]

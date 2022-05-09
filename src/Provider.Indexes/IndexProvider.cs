@@ -31,7 +31,7 @@ public class IndexProvider : IIndexProvider
 
     public static async Task<IndexProvider> Build(IDateTimeProvider dateTimeProvider, HttpClient httpClient, Index index, Holidays.Holidays holidays)
     {
-        var file = await httpClient.GetAsync($"https://kalkulatorkredytublob.blob.core.windows.net/wibor/{index.Name}.csv");
+        var file = await httpClient.GetAsync($"https://kalkulatorkredytublob.blob.core.windows.net/wibor/{index.Name}.csv?t={dateTimeProvider.Today.ToString("yyyyMMdd")}");
 
         using var reader = new StreamReader(await file.Content.ReadAsStreamAsync());
         using var csv = new CsvReader(reader, Config);
