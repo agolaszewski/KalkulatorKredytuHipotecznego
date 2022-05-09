@@ -65,7 +65,7 @@ jobs:
                 core.exportVariable('FROM', dateFormatted);
     
     - name: Override Parameters
-      if: github.event.schedule == null
+      # if: github.event.schedule == null
       run: |
            rm ./WiborData/PLOPLN6M.csv
            rm ./WiborData/PLOPLN3M.csv
